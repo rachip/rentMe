@@ -1,0 +1,1040 @@
+.left { float: left; }
+.right { float: right; }
+.top-15 { margin-top: 15px; }
+.top-20 { margin-top: 30px; }
+.right-2pe { margin-right: 2%; }
+.right-15 { margin-right: 15px; }
+.bottom-15 { margin-bottom: 15px;}
+.bottom-17 { margin-bottom: 17px;}
+.bottom-20 { margin-bottom: 20px;}
+.bottom-21 { margin-bottom: 21px;}
+.bottom-26 { margin-bottom: 26px;}
+.bottom-28 { margin-bottom: 28px;}
+.left-30 { margin-left: 30px; }
+.left-50 { margin-left: 50px; }
+.calign { text-align: center; }
+.ralign { text-align: right; }
+.width_20pe { width: 20%; }
+.width_48pe { width: 48%; }
+.width_50pe { width: 50%; }
+.width_80pe { width: 80%; }
+.width_85pe { width: 85%; }
+.width_100pe { width: 100%; }
+.line_2 { line-height: 2; }
+.line_40 { line-height: 40px; }
+.bold { font-weight: bold; }
+.dinline { display: inline-block; }
+.height_200px { height: 200px; }
+.clearb { clear: both; }
+.lightBlue { color: #499FCE }
+.blue { color: #1B4A64 }
+.brown { color: #A37E64 }
+.purple { color: #662756 }
+.green { color: #7F8354 }
+
+/* svg{width:30%;} */
+
+@font-face {
+    font-family: MuseoSans;
+    src: url('MuseoSans_500-webfont.woff');
+}
+
+body, h2, h4 {
+    font-family: 'MuseoSans';
+}
+
+.rowMainScreen {
+    background-image: url('img/coverLogin.jpg');
+    background-size: cover;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.invMainScr {
+    background-image: url('img/in.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 50%;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.updMainScr {
+    height: 350px;
+    width: 100%;
+}
+
+.updateMeMainScText, .enterMainScText {
+    width: 100%;
+    display: block;
+    top: 20%;
+    position: absolute;
+}
+
+.updateMeMainScText img {
+    width: 250px;
+    margin: 0px auto;
+    display: block;
+}
+
+.enterMainScText img {
+    width: 100px;
+    margin: 0px auto;
+    display: block;
+    margin-top: 60px;
+}
+
+.loginForm {
+    width: 100%;
+    top: 43%;
+    position: absolute;
+}
+
+input::-webkit-input-placeholder {
+    color: black;
+}
+
+.loginForm input {
+    width: 78%;
+    margin: 12px auto;
+    padding: 21px;
+    text-align: center;
+    background-color: rgba(251, 241, 241, 0.3);
+}
+
+.loginForm button {
+    width: 78%;
+    margin: 12px auto;
+    padding: 12px;
+    display: block;
+    background: black;
+    color: white;
+    border: none;
+    font-weight: bold;
+    background: rgba(12, 10, 10, 0.9);
+}
+
+.loginForm button[disabled] {
+   background-color: rgba(156, 156, 156, 0.71);
+}
+
+.incorectLogin {
+  width: 78%;
+  color: white;
+  margin: 0px auto;
+}
+
+.investText {
+    width: 31%;
+    float: left;
+    margin: 14px 0px;
+
+
+}
+
+.bar-header {
+    border-bottom-width: 0;
+}
+
+.pre_img {
+    height: 150px;
+    background: #ccc;
+    overflow: hidden;
+    width: 100%;
+}
+
+.markt-title {
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+100;Neutral+Density */
+background: -moz-linear-gradient(top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+position: absolute;
+color: white;
+padding: 5px;
+width: 49.1%;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.chatbox {
+    position:absolute;
+    bottom: 0px;
+}
+.message-input {
+    margin-top: 10px;
+}
+ 
+.chatbox-container {
+    font-size: 1.2rem;
+    color: rgba(0,0,0,0.8);
+    position:relative;
+    height: 200px;
+    border: 1px solid rgba(0,0,255, 0.2);
+    padding: 10px;
+    line-height: 29px;
+    overflow: hidden;
+}
+
+
+.col {
+    border: white 2px solid;
+    cursor: pointer;
+}
+
+.col-40 {
+    width: 40%;
+    float: left;
+    height: 170px;
+    background-size: cover;
+    background-position: center;
+} 
+
+.col-60 {
+    width: 60%;
+    float: left;
+    height: 170px;
+    background-size: cover;
+    background-position: center;
+}
+
+.col-100 {
+    width: 100%;
+    float: left;
+    height: 170px;
+    background-size: cover;
+    background-position: center;
+}
+
+.col-50 {
+    width: 50%;
+    float: left;
+    height: 170px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* ********************************************** */
+/* Overview page */
+.overviewMain {
+    background-image: url('img/coverLogin.jpg');
+    background-size: cover;
+    height: 255px;
+    background-position-y: -38px;
+}
+
+.overviewMain h2 {
+    color: white;
+    text-align: center;
+    margin: 0px;
+    padding-top: 20px;
+}
+
+.overviewMain h4 {
+    color: #E3DEDE;
+    text-align: center;
+    margin: 0px;
+}
+
+#INVESTMENTSimg {
+    width: 100%;
+}
+
+.overviewTitle {
+    text-align: center;
+    font-family: 'MuseoSans';
+    clear: both;
+}
+
+.overviewTitle h2 {
+   margin: 0;
+}
+
+.special {
+   padding-top: 20px;
+}
+
+.overviewTitle h4 {
+    margin: 0;
+    padding-bottom: 15px;
+}
+
+#barValue {
+    color: #E3DEDE;
+    font-family: 'MuseoSans';
+    margin-top: 60px;
+    position: relative;
+    /* margin-left: -26px; */
+    margin-right: 25px;
+    width: 95%;
+    font-size: 12px;
+}
+
+#barValue span {
+    font-size: 12px;
+}
+
+.totlaInvestment, .totalReturns, .totalTime, .yield {
+    color: white;
+    font-family: 'MuseoSans';
+}
+
+.totlaInvestment:after , .totalReturns:after {
+   font-family: 'MuseoSans';
+   content: "$";
+   color: white;    
+}
+
+.totlaInvestment, .totalReturns {
+   font-family: 'MuseoSans';
+   font-weight: bold;
+   float: right;    
+}
+
+.totlaInvestmentTitle, .totalReturnsTitle {
+    margin-left: 24px;
+    font-size: medium;  
+}
+
+/* ********************************************** */
+/* Marketing page */
+
+hr {
+    margin: 0;
+}
+
+.title {
+    text-align: center;
+    font-family: 'MuseoSans';
+    color: gray;
+    margin-top: 12px;
+}
+
+.subTitle {
+    text-align: center;
+    font-family: 'MuseoSans';
+    margin-bottom: 10px;    
+}
+
+.seeAll {	
+    font-family: 'MuseoSans';
+    background-color: black;
+    color: white;
+    width: 50%;
+    height: 35px;
+    margin: 13px 0px;
+    border: none;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 0 5px black;
+}
+
+.seeAllDiv {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.price:before {
+    content: "$";
+}
+
+.price {
+    position: relative;
+    top: 81%;
+    left: 25px;
+    font-weight: bold;
+    font-size: medium;
+    color: white;
+    font-family: 'MuseoSans';
+    text-shadow: 2px 2px #000000;
+}
+
+.address {
+    position: relative;
+    left: 25px;
+    font-weight: bold;
+    font-size: small;
+    color: white;
+    font-family: 'MuseoSans';
+    text-shadow: 2px 2px #000000;
+    top: 55%;
+}
+
+.desaturate {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.trapezoid:after {
+   font-family: 'MuseoSans';
+   content: "SOLD";
+   color: #CFC8C8;
+   margin-left: 34px;
+   font-size: large;
+   vertical-align: -webkit-baseline-middle;
+}
+
+.trapezoid {
+	position: absolute;
+    margin-top: 33px;
+    margin-left: -42px;
+    border-bottom: 30px solid black;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    height: 0;
+    width: 180px;
+    -webkit-transform: rotate(-45deg);
+}
+
+.spinner svg {
+    height: 80px;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 55%;
+    display: block;
+}
+
+/* ********************************************** */
+/* Property details page */
+
+.propertyImg {
+    width: 100%;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+}
+
+.propertyName {
+    font-family: 'MuseoSans';
+    font-size: x-large;
+    font-weight: bolder;
+    margin: 30px 30px 20px 30px;
+    /*text-shadow: 1px 1px #000000;*/
+}
+
+.propertyPrice {
+    font-family: 'MuseoSans';
+    font-size: x-large;
+    font-weight: bolder;
+    margin: 15px 30px 10px 30px;
+    /*text-shadow: 1px 1px #499FCE;*/
+}
+
+hr.propertyDetails {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    clear: both;
+}
+
+.section {
+    margin: 20px 30px;
+}
+
+.sectionTitle {
+    display: inline-block;
+}
+
+.arrow {
+    float: right;
+    margin-top: 7px;
+}
+
+ul.propertyDetails li {
+    font-family: 'MuseoSans';
+    line-height: 3;
+    font-size: medium;
+}
+
+ul.propertyDetails li span:first-child:after {
+    content: " :";
+}
+
+ul.propertyDetails li span:nth-child(2) {
+    float: right;
+    font-weight: bold;
+}
+
+.infoBtn {
+    width: 90%;
+    margin: 10px 5%;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 0 5px black;
+    background-color: black;
+    color: white;
+    height: 50px;
+    font-size: large;
+    position: absolute;
+}
+
+#barValueDiv2 {
+    color: #000000; 
+    font-family: 'MuseoSans';
+    padding-top: 16px;
+}
+
+.totlaInvestmentTitleDiv2, .totalReturnsTitleDiv2, .totlaTimeTitle, .currentYieldTitle {
+    font-family: 'MuseoSans';
+    font-size: medium;
+}
+
+.currentYieldTitle {
+    font-size: large;
+    font-weight: bold;
+}
+
+.totlaInvestmentDiv2, .totalReturnsDiv2, .totlaTime, .currentYield {
+    font-family: 'MuseoSans';
+    float: right;
+    font-weight: bold;
+}
+
+.totlaInvestmentDiv2:after, .totalReturnsDiv2:after {
+    content: " $";
+}
+
+.totlaTime:after {
+    content: " month";
+}
+
+.currentYield:after {
+    content: " %";
+}
+
+.requestPopup {
+    background-color: white;
+    border: 1px black solid;
+    padding: 20px;
+    width: 92%;
+    margin-left: 4%;
+    margin-bottom: -5%;
+    display: block;
+    bottom: -2%;
+}
+
+.requestPopup h3 {
+	width: 95%;
+    margin-right: 0px;
+    display: inline-block;
+}
+
+.requestPopup i {
+    position: relative;
+    top: -48px;
+    left: 97%;
+    font-size: 28px;
+}
+
+#requestInfo {
+
+}
+
+.checkboxFive {
+    width: 25px;
+    position: relative;
+}
+
+.checkboxFive label {
+    cursor: pointer;
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 9px;
+    left: 0;
+    background: #eee;
+    border:1px solid #ddd;
+}
+
+.checkboxFive label:after {
+    opacity: 0.2;
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 5px;
+    background: transparent;
+    top: 8px;
+    left: 7px;
+    border: 3px solid #333;
+    border-top: none;
+    border-right: none;
+
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.checkboxFive input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}
+
+ .custom {
+     background-color: #3f4041 !important;
+ }
+ 
+.popup-container .popup {
+	width: 325px;
+}
+
+.popup-head h3, .popup-body span, .popup-buttons button {
+	font-family: 'MuseoSans';
+}
+
+.button.button-positive {
+	background-color: #000000;
+}
+
+.button.button-positive.activated {
+	background-color: #000000;
+}
+ 
+ /*Set the background to transparent for ion-item*/
+.custom .item {
+  background-color: transparent;
+  border:none;   /*Removes all borders*/
+  border-top: 1px solid;   /*Top Border for each menu item*/
+  border-bottom:2px solid;   /*Bottom border for each menu item*/
+  border-color: #666;   /*Sets colors for top and bottom border*/
+  color: white;    /*Text color for each item*/
+  font-size: 22px;
+}
+ 
+/*Changes the border for the last item*/
+.custom .item:last-child {
+  border-bottom: 1px solid #666;
+}
+ 
+.custom .item-complex .item-content, .dark .item-radio .item-content {
+  background-color: transparent;
+      font-size: 22px;
+}
+ 
+/*Just makes the type white*/
+.custom h2, .custom h3, .custom p, .custom a {
+  color: white;  /*Text color for each item, overrides the color property above*/
+}
+
+.menu {
+    background-color: #3d3d3d;
+}
+
+.menu .bar-header {
+    background-color: #3d3d3d;
+    height: 99px;
+}
+
+.title .titleSide {
+    margin-top: 20px;
+    color: white;
+}
+
+.aaa {
+    background-image: url('img/Logo-white.png');
+    background-position: center;
+    background-size: cover;
+    width: 30px;
+    height: 19px;
+    margin-left: 7px;
+    padding-top: 17px;
+}
+
+.note {
+	font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    margin-left: 19px;
+}  
+
+.evictionNote {
+    font-weight: bold;
+    line-height: 1.5;
+    margin-left: 19px;
+} 
+
+.float-button {
+	background-color:#000000;
+	opacity: 0.9;
+	color: white;
+	border-radius: 50%;
+	/*border-radius:15% 0 0 0;*/
+	width: 30px;
+	padding: 25px;
+	font-size: 40px;
+	position: fixed;
+	bottom: 5%; /* Adjust height */
+	right: 5%; /* Adjust position */
+	z-index: 1000; 
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.float-button .height_fix {
+  margin-top: 100%;
+  border: 1px solid red;
+}
+
+.float-button .content {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: -15px;
+  color: white;
+}
+
+.float-button .content i {
+    font-size: 30px !important;
+}
+
+/* ********************************************** */
+/* Marketing Details page */
+.slider-pager .slider-pager-page {
+	color: #FFFFFF;
+}
+
+.status {
+	background-color: #A37E64;
+	color: white;
+	width: 100px;
+	height: 20px;
+	text-align: center;
+	margin-top: 10px;
+	padding-top: 2px;
+}
+
+ul.marketingDetails li {
+	line-height: 2.3;
+}
+
+.rating {
+	border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0));
+    clear: both;
+}
+
+.squre {
+	width: 20px;
+	height: 20px;
+	border-radius: 3px;
+	display: inline-block; 
+	margin-right: 6px;
+	vertical-align: middle;	
+}
+
+.squrePurchaseCost {	
+	background: #499FCE;	
+}
+
+.squreClosingCost {	
+	background: #1B4A64;	
+}
+
+.squreSoftCost {
+	background: #A37E64;	
+}
+
+.squreInvestmentME {
+	background: #662756;
+}
+
+.squreFinancing {
+	background: #7F8354;
+}
+
+.investmentAmountSpan {
+	vertical-align: middle;	
+}
+
+.v {
+	background-image: url('img/Check.png');
+	height: 34px;    
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 6px;
+    margin-left: -26px;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+}
+
+#myChart {
+	width: 100% !important;
+}
+
+.MarketImg {
+	width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+}
+
+.entrepreneurImg {
+	width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+}
+
+.btnDiv {
+	width: 95%;
+	margin: 15px 5%;	
+}
+
+.btn {
+   	width: 41.5%;
+    margin: 5px 9px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 0 5px black;
+    background-color: black;
+    color: white;
+    height: 40px;
+    font-size: medium;
+}
+
+.btn.offer {
+   	width: 90%;
+    margin: 5px 9px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 0 5px black;
+    background-color: black;
+    color: white;
+    height: 40px;
+    font-size: medium;
+}
+
+.sendMailPopup {
+    background-color: white;
+    border: 1px black solid;
+    padding: 20px;
+    width: 87.7%;
+    margin-bottom: -15px;
+    margin-left: 6.3%;
+}
+
+.sendMailPopup.offer {
+    background-color: white;
+    border: 1px black solid;
+    padding: 20px;
+    width: 87.7%;
+    margin-bottom: -15px;
+    margin-left: 6.3%;
+    position: relative;
+    bottom: -65px;
+}
+
+.sendMailPopup h3 {
+	width: 95%;
+    margin-right: 0px;
+    display: inline-block;
+}
+
+.sendMailPopup i {
+    position: relative;
+    top: -48px;
+    left: 97%;
+    font-size: 28px;
+}
+/* -------------- the chats part -------------------- */
+.messages { 
+	background: #E4E4E4; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    width: 60%; 
+    border-radius: 3px; 
+    float: left; 
+} 
+
+.other {  
+	background: #86D2FF; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    width: 70%; 
+    border-radius: 3px; 
+    float: right; 
+}  
+ 
+.other p, .messages p { 
+	margin: 0; 
+    color: #525050; 
+    font-size: 12px; 
+} 
+ 
+.statusBarChat { 
+	position: fixed; 
+    bottom: 0; 
+    right: 0; 
+    background: #353434; 
+    width: 100%; 
+    height: 140px; 
+    z-index: 9999; 
+} 
+ 
+.statusBarChat span { 
+	color: white; 
+    text-align: center; 
+    width: 100%; 
+    display: block; 
+    padding-top: 12px; 
+    font-size: 20px; 
+} 
+ 
+.col-100-p { 
+
+} 
+ 
+.col-50-p { 
+	width: 50%; 
+    float: left; 
+    padding: 10px; 
+    cursor: pointer; 
+} 
+ 
+ 
+.col-50-p span { 
+     background: rgba(251, 251, 251, 0.37); 
+     width: 100%; 
+     /* display: block; */ 
+     /* margin: 20px; */ 
+     padding-left: 21px; 
+     /* border: 2px #E6E2E2 solid; */ 
+     /* text-align: center; */ 
+     padding: 4px; 
+     border-radius: 4px; 
+     color: black; 
+}
+  
+ /** ios1-ios6 bubbles **/ 
+.bubble { 
+   box-sizing: border-box; 
+   float: left; 
+   width: auto; 
+   max-width: 80%; 
+   position: relative; 
+   clear: both;    
+   background: #FFFFFF;    
+   border: none; 
+   -webkit-border-radius: 10px; 
+   -moz-border-radius: 10px; 
+   border-radius: 10px;    
+   -webkit-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2); 
+   -moz-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2); 
+   box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2); 
+   margin-bottom: 20px; 
+   padding: 6px 20px; 
+   color: #000; 
+   text-shadow: 0 1px 1px rgba(255,255,255,0.8); 
+   word-wrap: break-word; 
+   margin-left: 20px; 
+} 
+ 
+bubble:before, .bubble:after { 
+   border-radius: 20px / 5px; 
+   content: ''; 
+   display: block; 
+   position: absolute; 
+} 
+
+.bubble:before { 
+   border: 10px solid transparent; 
+   border-bottom-color: rgba(0,0,0,0.5); 
+   bottom: 0px; 
+   left: -7px; 
+   z-index: -2; 
+} 
+
+.bubble:after { 
+	border: 8px solid transparent; 
+    border-bottom-color: #FFFFFF; 
+    bottom: 0px; 
+    left: -5px; 
+    -webkit-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 0px rgba(0,0,0,0.2); 
+    -moz-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2); 
+    /* box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2); */ 
+}  
+ 
+.bubble-alt { 
+   float: right; 
+} 
+
+.bubble-alt:before { 
+   left: auto; 
+   right: -7px; 
+} 
+
+.bubble-alt:after { 
+   left: auto; 
+   right: -5px; 
+}
+ 
+ /* yellow bubble */ 
+.yellow { 
+     background: #646564; 
+     float: right; 
+     margin-left: 0px; 
+     margin-right: 20px; 
+     border: none; 
+     text-shadow: none; 
+}
+ 
+.yellow:after { 
+     border: 8px solid transparent; 
+     border-bottom-color: #646564; 
+     bottom: 0px; 
+     right: -5px; 
+     left: 0; 
+    -webkit-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 0px rgba(0,0,0,0.2); 
+     -moz-box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2); 
+     /* box-shadow: inset 0 8px 5px rgba(255,255,255,0.65), 0 1px 2px rgba(0,0,0,0.2); */ 
+} 
+ 
+.yellow p, .yellow span { 
+	color: white; 
+} 
+
+/* *********************************************************** */
+/* Investment Amount chart - Marketing details page */
+path.slice {
+	stroke-width:2px;
+}
+
+polyline {
+	opacity: .3;
+	stroke: black;
+	stroke-width: 2px;
+	fill: none;
+} 
+
+svg text.percent {
+	fill: white;
+	text-anchor: middle;
+	font-size: 12px;
+}
+
+#investmentAmountCart svg {
+	margin-top: -9px;
+}
+.close_chat_box {	
+	float: right;
+    display: block;
+    width: initial;
+    background: #C10000;
+    border-radius: 50%;
+    width: 30px !important;
+    text-align: center;
+    line-height: 11px;
+    height: 30px;
+    font-weight: bold;
+    corsor: pointer;
+    cursor: pointer;
+    margin: -2% 2% 0px;
+}

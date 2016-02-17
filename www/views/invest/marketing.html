@@ -1,0 +1,81 @@
+<ion-view>
+ 	<ion-nav-title>
+      <img class="investText" src="css/img/investText.png">
+    </ion-nav-title>
+
+ <ion-pane>
+  <ion-content lazy-scroll has-header="true"> 
+   
+   <hr>
+   <ion-spinner icon="bubbles" ng-if='isRouteLoading' class="spinner"></ion-spinner>
+   <div ng-if='!isRouteLoading'>  
+	   <div id="columbus" ng-if="showColumbus == 1 && (selectedBranch == 3 || !selectedBranch)">
+	   	<div class="animated fadeInLeft title">COLLECTIONS</div>
+	   	<div class="animated fadeInLeft subTitle">Columbus properties</div>
+	   	<div ng-repeat="property in columbusProperties" class="animated fadeInLeft col {{property.class}}" 
+	    	ng-style="{'background-image': 'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{ property.FileName }})'}"
+	    	ng-if="$index <= 3 || selectedBranch == 3" ng-click="marketingDetails(property.PropertyId)">
+	    	<div ng-class="{trapezoid: property.IsSoled == 1}"></div>
+	    	<div class="price">{{property.Price}}</div>
+	    	<div class="address">{{property.Address}}</div>
+	   	</div>
+	   	
+	   	<div class="seeAllDiv">
+	   		<button class="seeAll" ng-click="seeMore(3)" ng-show="selectedBranch != 3">See All in commerical</button>
+	   		<button class="seeAll" ng-click="back()" ng-show="selectedBranch == 3 ">Back</button>
+	   	</div>
+	   </div>
+	   
+	   <div id="cleveland" ng-if="showCleveland == 1 && (selectedBranch == 2 || !selectedBranch)">
+	   <div class="animated fadeInLeft title">COLLECTIONS</div>
+	   	<div class="animated fadeInLeft subTitle">Cleveland properties</div>
+	   	<div ng-repeat="property in clevelandProperties" class="animated fadeInLeft col {{property.class}}" 
+	    	ng-style="{'background-image': 'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{ property.FileName }})'}"
+	    	ng-if="$index <= 3 || selectedBranch == 2" ng-click="marketingDetails(property.PropertyId)">
+	    	<div ng-class="{trapezoid: property.IsSoled == 1}"></div>
+	    	<div class="price">{{property.Price}}</div>
+	    	<div class="address">{{property.Address}}</div>	
+	   	</div>
+	   	<div class="seeAllDiv">
+	   		<button class="seeAll" ng-click="seeMore(2)" ng-show="selectedBranch != 2">See All in commerical</button>
+	   		<button class="seeAll" ng-click="back()" ng-show="selectedBranch == 2 ">Back</button>
+	   	</div>
+	   </div>
+	   
+	   <div id="rochester" ng-if="showRochester == 1 && (selectedBranch == 1 || !selectedBranch)">
+	   	<div class="animated fadeInLeft title">COLLECTIONS</div>
+	   	<div class="animated fadeInLeft subTitle">Rochester properties</div>
+	   	<div ng-repeat="property in rochesterProperties" class="animated fadeInLeft col {{property.class}}" 
+	    	ng-style="{'background-image': 'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{ property.FileName }})'}"
+	    	ng-if="$index <= 3 || selectedBranch == 1" ng-click="marketingDetails(property.PropertyId)">
+	    	<div ng-class="{trapezoid: property.IsSoled == 1}"></div>
+	    	<div class="price">{{property.Price}}</div>
+	    	<div class="address">{{property.Address}}</div>
+	   	</div>
+	   	
+	   	<div class="seeAllDiv">
+	   		<button class="seeAll" ng-click="seeMore(1)" ng-show="selectedBranch != 1">See All in commerical</button>
+	   		<button class="seeAll" ng-click="back()" ng-show="selectedBranch == 1 ">Back</button>
+	   	</div>
+	   </div>
+	   
+	   <div id="jacksonville" ng-if="showJacksonviller == 1 && (selectedBranch == 4 || !selectedBranch)">
+	   	<div class="animated fadeInLeft title">COLLECTIONS</div>
+	   	<div class="animated fadeInLeft subTitle">Jacksonville properties</div>
+	   	<div ng-repeat="property in jacksonvilleProperties" class="animated fadeInLeft col {{property.class}}" 
+	    	ng-style="{'background-image': 'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{ property.FileName }})'}"
+	    	ng-if="$index <= 3 || selectedBranch == 4" ng-click="marketingDetails(property.PropertyId)">
+	    	<div ng-class="{trapezoid: property.IsSoled == 1}"></div>
+	    	<div class="price">{{property.Price}}</div>
+	    	<div class="address">{{property.Address}}</div>
+	   	</div>
+	   	<div class="seeAllDiv">
+	   		<button class="seeAll" ng-click="seeMore(4)" ng-show="selectedBranch != 4">See All in commerical</button>
+	   		<button class="seeAll" ng-click="back()" ng-show="selectedBranch == 4 ">Back</button>
+	   	</div>
+	   </div>
+   </div>
+   </ion-content>
+  </ion-pane>
+  
+</ion-view>

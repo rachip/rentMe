@@ -1,0 +1,21 @@
+<ion-content class="content-stable" style="background: #EFEEEE;"> 
+	<div ng-if="chats">
+		<div ng-repeat="chat in chats" ng-class="{yellow: chat.userid != myId}" ng-if="isEmpty(chat.message)" 
+		class="bubble messages animated fadeIn"> 
+	        <div > 
+	        	<p class="nameSender">{{chat.user}}</p> 
+	            <span >{{chat.message}}</span> 
+	         </div> 
+		</div> 
+	</div>
+</ion-content> 
+ 
+     <ion-footer-bar keyboard-attach class="bar-stable item-input-inset"> 
+       <label class="item-input-wrapper"> 
+         <input type="text" placeholder="Type your message" ng-model="chat.message" /> 
+       </label> 
+       <button class="button button-clear" ng-click="sendChat(chat)"> 
+         Send 
+       </button> 
+     </ion-footer-bar> 
+   </ion-pane> 

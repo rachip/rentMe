@@ -1,0 +1,33 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left" >
+    <ion-content class="custom">
+      <ion-list>
+       <ion-item menu-close style="margin: 5%; font-size: 23px; color: white; border: none;">
+        <img src="css/img/Logo-white.png" style="width: 53px; margin: -4% 0px;" /> 
+        <span class="text_top_menu" style="font-size: 15px;"> REAL ESTATE </span>
+      </ion-item>
+        <ion-item menu-close ng-click="sideMenuNavigation()">
+          UPDATE
+          <img class="aaa"/>
+        </ion-item>
+        <ion-item menu-close href="#/invest/marketing" style="background: black;">
+          INVEST
+          <img class="aaa"/>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

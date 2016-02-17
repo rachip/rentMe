@@ -1,0 +1,490 @@
+<ion-view title="Invest ME">
+  <ion-content> 
+  	
+  	<ion-spinner icon="bubbles" ng-if='isMarketingDetailsLoading' class="spinner"></ion-spinner>
+  
+	<div ng-if="!isMarketingDetailsLoading">
+		<div>
+			<ion-slide-box ng-if="marketingPropertyImages">
+		   	<ion-slide ng-repeat="propertyImg in marketingPropertyImages">
+			    <div class="animated fadeInLeft propertyImg" 
+			    ng-style="{'background-image':'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{ propertyImg.FileName }})'}">		    
+			    </div>
+			  </ion-slide>	   	
+		   	</ion-slide-box>
+		</div>	
+	
+		<h4 class="bold calign top-15">{{marketingData.PropertyName}}</h4>
+		<h5 class="calign">{{marketingData.Address}}, {{marketingData.CityAndState}}, {{marketingData.Neighborhood}}</h5>
+		<div class="left-30 status">{{marketingData.Status}}</div>
+		<div class="propertyPrice lightBlue">$ {{marketingData.Price}}</div>
+		<div class="left-30 bottom-26">Potential annual return  {{marketingData.PotentialReturn}}%</div>
+		
+		<hr class="propertyDetails">	
+		
+		<!-- START Investment Details -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle lightBlue">Investment Details</h3>
+	 		<div> 			
+				<ul class="marketingDetails">
+					<li>
+						<span>Current Ann. Return</span>	
+						<span class="right brown">{{marketingData.CurrentAnnualReturn}}%</span>
+					</li>
+					<li>
+						<span>Accrued Ann. Return</span>	
+						<span class="right brown">{{marketingData.AccruedAnnualReturn}}%</span>
+					</li>
+					<li>
+						<span class="bold">Gross Ann. Return*</span>	
+						<span class="right bold brown">{{marketingData.GrossAnnualReturn}}%</span>
+					</li>			
+					<li>
+						<span>Term Remaining:</span>	
+						<span class="right brown">{{marketingData.TermRemaining}}</span>
+					</li>
+					<li>
+						<span>Min. Investment:</span>	
+						<span class="right brown">{{marketingData.MinInvestment}}</span>
+					</li>
+					<li>
+						<span>Investment Size:</span>	
+						<span class="right brown">${{marketingData.InvestmentSize}}</span>
+					</li>
+					<li class="bottom-28">
+						<span>Underlying Security:</span>	
+						<span class="right brown">{{marketingData.UnderlyingSecurity}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	 	<!-- END Investment Details -->
+		
+		<hr class="propertyDetails">
+		
+		<!-- START Investment Summary -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">Investment Summary</h3>
+			<p>{{marketingData.InvestmentSummary}}</p>		     
+	 	</div> 
+	 	<!-- END Investment Summary -->
+	 	
+	 	<hr class="propertyDetails">
+	 </div>	
+	 
+	 <div ng-show="!isMarketingDetailsLoading">
+	 	<!-- START Investment Amount -->
+	 	<div class="section"> 
+	 		<h3 class="sectionTitle">Investment Amount</h3>
+	 		<div> 			
+	 			<div class="left dinline height_200px width_50pe">
+	 				<ul class="marketingDetails">
+		 				<li>
+		 					<div class="squre squrePurchaseCost"></div>
+		 					<span class="investmentAmountSpan">Purchase Cost</span>
+		 				</li>
+		 				
+		 				<li>
+		 					<div class="squre squreClosingCost"></div>
+		 					<span class="investmentAmountSpan">Closing Cost</span>
+		 				</li>
+		 				
+		 				<li>
+		 					<div class="squre squreSoftCost"></div>
+		 					<span class="investmentAmountSpan">Soft Cost</span>
+		 				</li>
+		 				
+		 				<li>
+		 					<div class="squre squreInvestmentME"></div>
+		 					<span class="investmentAmountSpan">Investment ME</span>
+		 				</li>
+		 				
+		 				<li>
+		 					<div class="squre squreFinancing"></div>
+		 					<span class="investmentAmountSpan">Financing</span>
+		 				</li>
+	 				</ul>
+	 			</div>
+	 			<div class="right dinline width_50pe" id="investmentAmountCart"></div>
+	 		</div> 		
+		</div>
+		<!-- END Investment Amount -->
+	</div>
+	
+	<div ng-if="!isMarketingDetailsLoading"> 	
+		<hr class="propertyDetails">
+	 	
+	 	<!-- START Capital Structure -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">Capital Structure</h3>
+	 			<ul class="marketingDetails">
+	 				<li>
+						<span>Type</span>	
+						<span class="right">Purchase Cost</span>
+					</li>
+					<li>
+						<span>Source</span>	
+						<span class="right">{{marketingData.PurchaseCostSource}}</span>
+					</li>
+					<li>
+						<span>% of Total</span>	
+						<span class="right">{{purchaseCostTotalPercent}}%</span>
+					</li>			
+					<li>
+						<span>Amount</span>	
+						<span class="right">${{purchaseCostAmount}}</span>
+					</li>
+					<li>
+						<hr class="rating">
+					</li>
+					<li>
+						<span>Type</span>	
+						<span class="right">Closing Cost</span>
+					</li>
+					<li>
+						<span>Source</span>	
+						<span class="right">{{marketingData.ClosingCostSource}}</span>
+					</li>
+					<li>
+						<span>% of Total</span>	
+						<span class="right">{{closingCostTotalPercent}}%</span>
+					</li>			
+					<li>
+						<span>Amount</span>	
+						<span class="right">${{closingCostAmount}}</span>
+					</li>
+					<li>
+						<hr class="rating">
+					</li>			
+					<li>
+						<span>Type</span>	
+						<span class="right">Soft Cost</span>
+					</li>
+					<li>
+						<span>Source</span>	
+						<span class="right">{{marketingData.SoftCostSource}}</span>
+					</li>
+					<li>
+						<span>% of Total</span>	
+						<span class="right">{{softCostTotalPercent}}%</span>
+					</li>			
+					<li>
+						<span>Amount</span>	
+						<span class="right">${{softCostAmount}}</span>
+					</li>
+					<li>
+					<hr class="rating">
+					</li>			
+					<li>
+						<span>Type</span>	
+						<span class="right">Investment ME</span>
+					</li>
+					<li>
+						<span>Source</span>	
+						<span class="right">{{marketingData.InvestmentMESource}}</span>
+					</li>
+					<li>
+						<span>% of Total</span>	
+						<span class="right">{{investmentMETotalPercent}}%</span>
+					</li>			
+					<li>
+						<span>Amount</span>	
+						<span class="right">${{investmentMEAmount}}</span>
+					</li>
+					<li>
+						<hr class="rating">
+					</li>
+					<li>
+						<span>Type</span>	
+						<span class="right">Financing</span>
+					</li>
+					<li>
+						<span>Source</span>	
+						<span class="right">{{marketingData.FinancingSource}}</span>
+					</li>
+					<li>
+						<span>% of Total</span>	
+						<span class="right">{{financingTotalPercent}}%</span>
+					</li>			
+					<li>
+						<span>Amount</span>	
+						<span class="right">${{financingAmount}}</span>
+					</li>
+					<li>
+						<hr class="rating">
+					</li>
+					<li>
+						<span class="bold">Type</span>	
+						<span class="right bold">Total</span>
+					</li>				
+					<li>
+						<span class="bold">% of Total</span>	
+						<span class="right bold">{{totalPercent}}%</span>
+					</li>			
+					<li>
+						<span class="bold">Amount</span>	
+						<span class="right bold">${{totalAmount}}</span>
+					</li>												
+	 			</ul>
+	 	</div> 
+	 	<!-- END Capital Structure-->
+	 	
+	 	<hr class="propertyDetails">
+	 	
+	 	<!-- START Key Deal Points -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">Key Deal Points</h3>
+			<div ng-if="marketingData.KDPTitle1 != ''" class="width_100pe">
+				<div class="v width_20pe left"></div>
+				<div class="width_85pe left">
+					<h4>{{marketingData.KDPTitle1}}</h4>
+					<p>{{marketingData.KDPValue1}}</p>
+				</div>
+			</div>
+			<div ng-if="marketingData.KDPTitle2 != ''" class="width_100pe">
+				<div class="v width_20pe left"></div>
+				<div class="width_85pe left">
+					<h4>{{marketingData.KDPTitle2}}</h4>
+					<p>{{marketingData.KDPValue2}}</p>
+				</div>
+			</div>
+			<div ng-if="marketingData.KDPTitle3 != ''" class="width_100pe">
+				<div class="v width_20pe left"></div>
+				<div class="width_85pe left">
+					<h4>{{marketingData.KDPTitle3}}</h4>
+					<p>{{marketingData.KDPValue3}}</p>
+				</div>
+			</div>
+			<div ng-if="marketingData.KDPTitle4 != ''" class="width_100pe">
+				<div class="v width_20pe left"></div>
+				<div class="width_85pe left">
+					<h4>{{marketingData.KDPTitle4}}</h4>
+					<p>{{marketingData.KDPValue4}}</p>
+				</div>
+			</div>
+			<div ng-if="marketingData.KDPTitle5 != ''" class="width_100pe">
+				<div class="v width_20pe left"></div>
+				<div class="width_85pe left">
+					<h4>{{marketingData.KDPTitle5}}</h4>
+					<p>{{marketingData.KDPValue5}}</p>
+				</div>
+			</div>
+	 	</div> 
+	 	<!-- END Key Deal Points-->
+	 	<hr class="propertyDetails">		 	
+	</div>
+	
+	<div ng-show="!isMarketingDetailsLoading"> 		
+	 	<div class="section">
+			<h3 class="">Sensitivity Analysis</h3>
+	 		<canvas id="myChart" width="320" height="800" style="margin-left: -5px;"></canvas>
+	 	</div> 
+	 	
+	 	<hr class="propertyDetails">
+	 	
+	 	<!-- START Fundrise Rating -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">ME Rating</h3>
+			<div>
+				<div class="ratingImg"></div> 
+				<div>{{marketingData.RatingSummary}}</div>			
+			</div>     
+	 	</div> 
+	 	<!-- END Fundrise Rating-->
+	 		 	
+	 	<hr class="propertyDetails">
+	 	
+	 	<!-- START Property Location -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">Property Location</h3>
+	 		<div id="map" data-tap-disabled="true"></div>
+	 	</div> 
+	 	<!-- END Property Location -->
+	 	
+	 	<hr class="propertyDetails">
+	 	
+	 	<!-- START Property Summary -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">Property Summary</h3>
+	 		<p>{{marketingData.PropertySummary}}</p>
+	 		<ul class="marketingDetails">
+				<li>
+					<span>Address</span>	
+					<span class="right brown">{{marketingData.Address}}</span>
+				</li>
+				<li>
+					<span>City & State</span>	
+					<span class="right brown">{{marketingData.CityAndState}}</span>
+				</li>
+				<li>
+					<span>Neighborhood</span>	
+					<span class="right brown">{{marketingData.Neighborhood}}</span>
+				</li>			
+				<li>
+					<span>Product Type</span>	
+					<span class="right brown">{{marketingData.ProductType}}</span>
+				</li>
+				<li>
+					<span>Project Phase</span>	
+					<span class="right brown">{{marketingData.ProjectPhase}}</span>
+				</li>								
+	 		</ul>	
+	 	</div> 
+	 	<!-- END Property Summary-->
+	 	
+	 	<hr class="propertyDetails">
+	 	
+	 	<!-- START market Summary -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">Market Summary</h3>
+	 		<div class="animated fadeInLeft MarketImg bottom-15" 
+		    	ng-style="{'background-image':'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/' + summaryFileName + ')'}">		    
+		    </div>
+	 		<p class="bottom-15">{{marketingData.MarketSummary}}</p>
+	 	</div> 
+	 	<!-- END market Summary-->
+	 	
+	 	<hr class="propertyDetails">
+	 	
+	 	<!-- START About the Entrepreneur -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">About the Entrepreneur</h3>
+	 		<div class="width_100pe">
+	 			<div class="animated fadeInLeft entrepreneurImg left dinline right-15 bottom-15" 
+				    ng-style="{'background-image':'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/' + entrepreneurFileName + ')'}">		    
+				</div>
+	 			
+	 			<div>
+	 				<span>{{marketingData.EntrepreneurName}}</span>
+	 				<br>
+	 				<span>{{marketingData.EntrepreneurTitle}}</span>
+	 			</div>
+	 		</div>
+	 		<p class="clearb bottom-21">{{marketingData.EntrepreneurDescription}}</p>
+	 	</div> 
+	 	<!-- END About the Entrepreneur-->
+	 	
+	 	<hr class="propertyDetails">
+	 	
+	 	<!-- START Fee Schedule -->
+		<div class="section"> 
+	 		<h3 class="sectionTitle">Fee Schedule</h3>
+	 		<div> 			
+				<ul class="marketingDetails">
+					<li>
+						<span>Gross Ann. Return*</span>	
+						<span class="right">{{marketingData.GrossAnnualReturn}}%</span>
+					</li>			
+					<li>
+						<span>Servicing and administration fee</span>	
+						<span class="right">-{{marketingData.ServicingAndAdministrationFee}}%</span>
+					</li>
+					<li>
+						<span class="bold">Net ann. return to investors</span>	
+						<span class="right bold">{{marketingData.GrossAnnualReturn - marketingData.ServicingAndAdministrationFee}}%</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	 	<!-- END Fee Schedule -->
+	 	
+	 	<div id="mailPopup" ng-show="sendMail == 1" class="sendMailPopup offer">
+			<div>
+				<h3 class="calign">Send Mail</h3>
+				<i class="ralign icon ion-android-cancel" ng-click="closeMailPopup()"></i>
+			</div>
+			<div class="list">	
+				<ul class="propertyDetails">			
+					<li>
+						<span>Name </span>
+						<label class="item item-input">	
+							<input class="" type="text" placeholder="Your Name" ng-model="MailObj.name">	
+						</label>
+					</li>
+					
+					<li>
+						<span>Mail </span>
+						<label class="item item-input">	
+							<input class="" type="text" placeholder="Your Email" ng-model="MailObj.mail">	
+						</label>
+					</li>
+					<li>
+						<span>Phone </span>
+						<label class="item item-input">
+						    <input type="text" placeholder="Your Phone" ng-model="MailObj.phone"/>
+						</label>	
+						
+					</li>
+					<li>
+						<span>Address </span>
+						<label class="item item-input">
+							<input class="" type="text" placeholder="Your Address" ng-model="MailObj.address"/>
+						</label>
+					</li>
+					<li>
+						<span>Meeting schedule </span>
+						<label class="item item-input">
+							<input class="" type="text" placeholder="yyyy-mm-dd" ng-model="MailObj.schedule"/>
+						</label>
+					</li>
+					<li>
+						<div class="calign top-20">
+							<button class="seeAll" ng-click="send()">Send</button>
+						</div>
+					</li>
+				</ul>
+			</div>	
+		</div>
+	 	
+	 	<div id="mailPopup" ng-show="meet == 1" class="sendMailPopup">		
+			<div>
+				<h3 class="calign">Send Mail</h3>
+				<i class="ralign icon ion-android-cancel" ng-click="closeMeetingPopup()"></i>
+			</div>
+			<div class="list">	
+				<ul class="propertyDetails">			
+					<li>
+						<span>Name </span>
+						<label class="item item-input">	
+							<input class="" type="text" placeholder="Your Name" ng-model="MailObj.name">	
+						</label>
+					</li>
+					
+					<li>
+						<span>Mail </span>
+						<label class="item item-input">	
+							<input class="" type="text" placeholder="Your Email" ng-model="MailObj.mail">	
+						</label>
+					</li>
+					<li>
+						<span>Phone </span>
+						<label class="item item-input">
+						    <input type="text" placeholder="Your Phone" ng-model="MailObj.phone"/>
+						</label>	
+						
+					</li>				
+					<li>
+						<span>Meeting schedule </span>
+						<label class="item item-input">
+							<input class="" type="text" placeholder="yyyy-mm-dd" ng-model="MailObj.schedule"/>
+						</label>
+					</li>
+					<li>
+						<div class="calign top-20">
+							<button class="seeAll" ng-click="setMeeting()">Send</button>
+						</div>
+					</li>
+				</ul>
+			</div>	
+		</div>
+		
+	 	<div class="btnDiv">	 		
+	 		<button class="btn" ng-click="share(marketingData.PropertyId)">SHARE</button>
+	 		<button class="btn" ng-click="meeting()">MEETING</button>
+	 	</div>
+	 	<div class="btnDiv">
+	 		<button class="btn offer" ng-click="buy()">MAKE AN OFFER</button>
+	 	</div>
+ 	</div>
+  </ion-content>
+</ion-view>

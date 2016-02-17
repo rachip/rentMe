@@ -1,0 +1,36 @@
+   <ion-view>
+ 	<ion-nav-title>
+      <img class="investText" src="css/img/investText.png">
+    </ion-nav-title>
+
+ <ion-pane>
+  <ion-content lazy-scroll has-header="true"> 
+   
+    <!-- Button Starts --> 
+	<div class="statusBarChat" ng-show="chatSelected"> 
+    	<span> SELECT BRANCH </span>  
+    	<div class="col-100-p"> 
+		     <div class="col-50-p" ng-click="branchToChat('Cleveland')"> 
+		       <span> Cleveland  </span> 
+		     </div> 
+	 
+		     <div class="col-50-p" ng-click="branchToChat('Rochester')"> 
+		        <span> Rochester </span> 
+		     </div> 
+	 
+	        <div class="col-50-p" ng-click="branchToChat('Columbus')"> 
+	        	<span> Columbus </span> 
+	     	</div> 
+	 
+	        <div class="col-50-p" ng-click="branchToChat('Jacksonville')"> 
+	        	<span> Jacksonville </span> 
+	     	</div> 
+    	</div> 
+ 
+ 
+	</div> 
+	<!-- Button Ends --> 
+	
+	 </ion-content>
+	 </ion-pane>
+	 </ion-view>

@@ -1,0 +1,32 @@
+<ion-view class="rowMainScreen" hide-nav-bar="true" cache-view="false">
+  <ion-content scroll="false"> 
+    <div class="">
+        <div class="updMainScr">
+			<span class="updateMeMainScText">
+				<img src="css/img/updateme.png">
+			</span>
+
+			<form name="login_form" class="loginForm" ng-submit="submit()" method="post" novalidate ng-cloak ng-show="loginClick===1">
+
+				<input name="user_email" ng-class="{'animated fadeInDown': loginClick===1}" type="email" ng-model="userDetail.email" placeholder="Username" required>
+				<input name="user_password" ng-class="{'animated fadeInDown': loginClick===1}" type="password" ng-model="userDetail.password" placeholder="Password" required>
+				<div class="incorectLogin" ng-class="{'animated fadeInDown': errorLogin===1}">
+            	  	{{msg}}
+            	 </div>
+				<button type="submit" ng-class="{'animated fadeInDown': loginClick===1}" ng-disabled="login_form.user_email.$invalid || login_form.user_password.$invalid">
+				 Log In
+                </button>
+
+		   </form>
+
+			<span class="enterMainScText" ng-hide="loginClick===1" >
+				<img src="css/img/enter.png" class="pointer" ng-click="updateMe()">
+			</span>
+		</div>
+		                        
+		<div class="invMainScr" ng-class="{'animated fadeOutDown': loginClick===1}"  ng-click="investMe()">
+		</div>
+    </div>
+  </ion-content>
+</ion-view>
+

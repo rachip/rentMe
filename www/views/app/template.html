@@ -1,0 +1,73 @@
+<div class="cloas_cahtc_box">
+<ion-side-menus enable-menu-with-back-views="false"> 
+   <ion-side-menu-content> 
+     <ion-nav-bar class="bar-stable"> 
+       <ion-nav-back-button ng-click="myGoBack()"> 
+       </ion-nav-back-button> 
+ 
+ 
+       <ion-nav-buttons side="left"> 
+         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"> 
+         </button> 
+       </ion-nav-buttons> 
+     </ion-nav-bar> 
+     <ion-nav-view name="menuContent"></ion-nav-view> 
+   </ion-side-menu-content> 
+ 
+   <ion-side-menu side="left" > 
+     <ion-content class="custom"> 
+       <ion-list> 
+        <ion-item menu-close style="margin: 5%; font-size: 23px; color: white; border: none;"> 
+         <img src="css/img/Logo-white.png" style="width: 53px; margin: -4% 0px;" />  
+         <span class="text_top_menu" style="font-size: 15px;"> REAL ESTATE </span> 
+       </ion-item> 
+         <ion-item menu-close href="#/auth/main" style="background: black;"> 
+           UPDATE 
+           <img class="aaa"/> 
+         </ion-item> 
+         <ion-item menu-close href="#/invest/marketing"> 
+           INVEST 
+           <img class="aaa"/> 
+         </ion-item> 
+       </ion-list> 
+     </ion-content> 
+   </ion-side-menu> 
+ </ion-side-menus> 
+ 
+
+ 
+    <!-- Button Starts --> 
+	<div class="statusBarChat" ng-show="chatSelected"> 
+	<span class="close_chat_box" ng-click="hide_chat_box()">X</span>
+    	<span> SELECT BRANCH </span>  
+    	<div class="col-100-p"> 
+		     <div class="col-50-p" ng-click="branchToChat('Cleveland')"> 
+		       <span> Cleveland  </span> 
+		     </div> 
+	 
+		     <div class="col-50-p" ng-click="branchToChat('Rochester')"> 
+		        <span> Rochester </span> 
+		     </div> 
+	 
+	        <div class="col-50-p" ng-click="branchToChat('Columbus')"> 
+	        	<span> Columbus </span> 
+	     	</div> 
+	 
+	        <div class="col-50-p" ng-click="branchToChat('Jacksonville')"> 
+	        	<span> Jacksonville </span> 
+	     	</div> 
+    	</div> 
+ 
+ 
+	</div> 
+	<!-- Button Ends --> 
+ 
+  <!-- Button Starts --> 
+   <div class="float-button" ng-show="show_chat_bu" ng-click="selectChat()"> 
+     <span class="height-fix"> 
+         <a class="content"> 
+           <i class="ion-ios-chatboxes"> </i> 
+         </a> 
+       </span> 
+   </div> 
+ <!-- Button Ends --> 
