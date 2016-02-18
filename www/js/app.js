@@ -119,7 +119,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'ngCordova', 'starter.c
   })
   
   //overview
-  .state('app.overview', {
+  /*.state('app.overview', {
     url: "/overview",
     views: {
     	'menuContent': {
@@ -127,7 +127,7 @@ angular.module('starter', ['ionic','ionic.service.core', 'ngCordova', 'starter.c
 		  controller: 'OverviewPropertiesCtrl'
     	}
     }
-  })
+  })*/
   
   //property details
   .state('app.propertyDetails', {

@@ -31,6 +31,14 @@ angular.module('starter.controllers', ['firebase'])
 //LOGIN
 .controller('LoginCtrl', function($scope, $rootScope, $http, $state, $location) {
 
+	$scope.rentMe = function() {
+		$state.go('app.propertyDetails');
+	}
+	
+	$scope.fixMe = function() {
+		$state.go('invest.marketing');
+	}
+	
 	$scope.loginClick = 0;
 	$scope.errorLogin = 0;
 
@@ -208,7 +216,7 @@ angular.module('starter.controllers', ['firebase'])
 		}
 	}
 	
-	$scope.buy = function() {
+	$scope.rent = function() {
 		$ionicScrollDelegate.scrollBottom();
 		$scope.sendMail = 1;
 	};
@@ -233,15 +241,15 @@ angular.module('starter.controllers', ['firebase'])
 		$scope.sendMail = 0;
 		
 		var obj = {name: $scope.MailObj.name, mail: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address, schedule: $scope.MailObj.schedule};
+				   address: $scope.MailObj.address};
 		console.log(obj);
 		
 		// send mail to moshe gmail
 		$http({
-		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Email/buy', 
+		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/rent', 
 		    method: "POST",
 		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address, schedule: $scope.MailObj.schedule},
+				   address: $scope.MailObj.address},
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then(function(resp) {
 			console.log("sucess")
@@ -249,12 +257,12 @@ angular.module('starter.controllers', ['firebase'])
 		    console.error('ERR', err);
 		})	
 		
-		// save mail details in contacts leader tbl
+		// save mail details in S_ContactsLeads tbl
 		$http({
-		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Email/addContactLeader', 
+		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/addContactLeads', 
 		    method: "POST",
 		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address, schedule: $scope.MailObj.schedule},
+				   address: $scope.MailObj.address},
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then(function(resp) {
 			console.log("sucess")
@@ -263,43 +271,6 @@ angular.module('starter.controllers', ['firebase'])
 		})	
 		$scope.MailObj = {};
 	}
-	
-	$scope.setMeeting = function() {
-		$ionicScrollDelegate.scrollTop();		
-		$scope.meet = 0;
-		
-		var obj = {name: $scope.MailObj.name, mail: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address, schedule: $scope.MailObj.schedule};
-		console.log(obj);
-		
-		// send mail to moshe gmail
-		$http({
-		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Email/setMeeting', 
-		    method: "POST",
-		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   schedule: $scope.MailObj.schedule},
-		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-		}).then(function(resp) {
-			console.log("sucess")
-		}, function(err) {
-		    console.error('ERR', err);
-		})	
-		
-		// save mail details in contacts leader tbl
-		$http({
-		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Email/addContactLeader', 
-		    method: "POST",
-		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: '', schedule: $scope.MailObj.schedule},
-		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-		}).then(function(resp) {
-			console.log("sucess")
-		}, function(err) {
-		    console.error('ERR', err);
-		})
-		$scope.MailObj = {};
-	}
-	
 })
 
 //Chats Ctrl
@@ -308,15 +279,12 @@ angular.module('starter.controllers', ['firebase'])
  	$scope.myGoBack = function() { 
  		$ionicHistory.goBack(); 
  		$scope.show_chat_bu = true;
- 		
     }; 
 	
 	$scope.show_chat_bu = true;
 	
 	$scope.hide_chat_box = function() {
-		
 		$scope.chatSelected = false;
-		
 	}
 
 	$scope.branchToChat = function (BranchName) { 
@@ -365,8 +333,6 @@ angular.module('starter.controllers', ['firebase'])
  		chat.message = ""; 
  	} 
  
-
-    
     $scope.isEmpty = function (obj) {
     	console.log("obj "+ obj);
         if (obj == "") 
@@ -375,38 +341,6 @@ angular.module('starter.controllers', ['firebase'])
         	return true;
     };
 }) 
-
-//OverviewProperties Ctrl - logged in user
-.controller('OverviewPropertiesCtrl', function($scope, $http, $timeout, $rootScope, $state, $q, $ionicScrollDelegate) {
-    var id; 
-    $scope.isOverviewLoading = true;    
-    
-    $scope.init = function() {
-    	var promise = getOverviewPageData($scope, $rootScope, $http, $q);
-		promise.then(function() {
-		}, function() {
-			alert('Failed: ');
-		});
-		
-		getMainBarValues($scope, $http);
-    }
-    
-	$scope.showPropertyDetails = function(propertyId, imageURL) {
-		console.log("showDetails function " + propertyId);
-		$state.go('app.propertyDetails');
-	    $timeout(function() {
-	    	var unbind = $rootScope.$broadcast( "showDetails", {PropertyId:propertyId, ImageURL:imageURL} );
-	    });
-	};
-	
-	$scope.gotoMarketing = function(propertyId) {
-	    $ionicScrollDelegate.scrollTop();
-		$state.go('invest.marketingDetails');
-		$timeout(function() {
-	    	var unbind = $rootScope.$broadcast( "marketingDetails", {marketingPropertyId:propertyId} );
-	    });
-	};
-})
 
 //propertyDetails ctrl
 .controller('PropertyDetailsCtrl', function($scope, $ionicScrollDelegate, $http, $rootScope, 
@@ -424,15 +358,14 @@ angular.module('starter.controllers', ['firebase'])
 	
 	$rootScope.isPropertyDetailsLoading = true;
 	
-	var propertyId;
-	$scope.$on( "showDetails", function(event, data) {
+	var propertyId = 1;
+	
 		propertyId = data.PropertyId;	
 		var promise = getOverviewDetailsPageData(propertyId, $scope, $http, $q);
 		promise.then(function() {
 		}, function() {
 			alert('Failed: ');
 		});			
-	});
 	
 	$scope.click = function(section) {		
 		switch(section){
@@ -526,69 +459,6 @@ function getPropertyImage(propertyId, $scope, $http) {
 	}).then(function(resp) {
 		if (resp.data.length != 0) {
 			$scope.allImages = resp.data;			
-		} 		
-	}, function(err) {
-	    console.error('ERR', err);
-	})
-}
-
-function getPropertyChart(propertyId, $scope, $http) {
-	console.log("getPropertyChart function" + propertyId);
-	$http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Property/getPropertyROIChartAPI', 
-	    method: "GET",
-	    params:  {index: propertyId}, 
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-	}).then(function(resp) {
-		if (resp.data.length != 0) {
-			
-			$scope.propertyChart = resp.data[0];
-			
-			var totalReturn = parseFloat(resp.data[0]['TotalReturn']);
-			var investmentAmount = parseFloat(resp.data[0]['InvestmentAmount']);
-			var dbDate = resp.data[0]['InvestmentDate'];
-			
-			var today = new Date();
-			var date = (dbDate != "0000-00-00") ? new Date(dbDate) : new Date();
-			
-			var months;
-		    months = (today.getFullYear() - date.getFullYear()) * 12;
-		    months -= date.getMonth() + 1;
-		    months += today.getMonth();
-		    $scope.month = months <= 0 ? 0 : months;
- 
-		    
-		    $scope.currentYield = ($scope.month && investmentAmount) ? totalReturn / $scope.month * 12 / investmentAmount : 0;
-			var val = (investmentAmount != 0) ? totalReturn / investmentAmount * 100 : 0;
-			
-			$scope.propertyChart.InvestmentAmount = numberWithCommas($scope.propertyChart.InvestmentAmount);
-			$scope.propertyChart.TotalReturn = numberWithCommas($scope.propertyChart.TotalReturn);
-			
-			// bar
-			var div2 = d3.select(document.getElementById('div2'));
-			start();
-
-			function onClick1() {
-			    deselect();
-			}
-
-			function labelFunction(val,min,max) {
-
-			}
-
-			function deselect() {
-			    //div1.attr("class","radial");
-			}
-
-			function start() {
-				$('.label').val("sghdsfhsdf");
-			    var rp1 = radialProgress(document.getElementById('div2'))
-			            .label("ROI")
-			            .onClick(onClick1)
-			            .diameter(120)
-			            .value(val)
-			            .render();
-			}
 		} 		
 	}, function(err) {
 	    console.error('ERR', err);
@@ -768,7 +638,7 @@ function addClass(data) {
 	//----------------------
 	//add desaturate class
 	for(i = 0; i < data.length; i++) {
-		if(data[i]["IsSoled"] == 1) {
+		if(data[i]["Status"] == 'Rented') {
 			data[i].class += " desaturate";
 		}
 	}
@@ -777,7 +647,7 @@ function addClass(data) {
 function getRochesterProperties($scope, $http) {
 	// get properties to Rochester branch
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Marketing/getPropertiesPerBranchId', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Marketing/getPropertiesPerBranchId', 
 	    method: "GET",
 	    params:  {index:1}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -799,7 +669,7 @@ function getRochesterProperties($scope, $http) {
 function getClevelandProperties($scope, $http) {
 	// get properties to cleveland branch
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Marketing/getPropertiesPerBranchId', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Marketing/getPropertiesPerBranchId', 
 	    method: "GET",
 	    params:  {index:2}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -821,7 +691,7 @@ function getClevelandProperties($scope, $http) {
 function getColumbusProperties($scope, $http) {
 	// get properties to columbus branch
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Marketing/getPropertiesPerBranchId', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Marketing/getPropertiesPerBranchId', 
 	    method: "GET",
 	    params:  {index:3}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -842,7 +712,7 @@ function getColumbusProperties($scope, $http) {
 function getJacksonvilleProperties($scope, $http) {
 	// get properties to jacksonville branch
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Marketing/getPropertiesPerBranchId', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Marketing/getPropertiesPerBranchId', 
 	    method: "GET",
 	    params:  {index:4}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -861,8 +731,10 @@ function getJacksonvilleProperties($scope, $http) {
 }
 
 function getProperties($scope, $http, $q) {	 
-	return $q.all([getRochesterProperties($scope, $http), getClevelandProperties($scope, $http), 
-	                getColumbusProperties($scope, $http), getJacksonvilleProperties($scope, $http)]).
+	return $q.all([getRochesterProperties($scope, $http), 
+	               getClevelandProperties($scope, $http), 
+	                getColumbusProperties($scope, $http), 
+	                getJacksonvilleProperties($scope, $http)]).
 	                then(function(results) {
 		$scope.isRouteLoading = false;
 	});
@@ -870,7 +742,7 @@ function getProperties($scope, $http, $q) {
 
 function getAllMarketingPropertyImages(propertyId, $scope, $http) {
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Marketing/getAllMarketingPropertyImages', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Marketing/getAllMarketingPropertyImages', 
 	    method: "GET",
 	    params:  {index:propertyId}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -884,10 +756,10 @@ function getAllMarketingPropertyImages(propertyId, $scope, $http) {
 }
 
 function getMarketingPropertyInfo(propertyId, $scope, $http) {
-	var investmentAmount, salePrice, purchaseCost, closingCost, softCost, investmentME, financing, address;
+	var address;
 	
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Marketing/getMarketingId', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Marketing/getMarketingId', 
 	    method: "GET",
 	    params:  {index:propertyId}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -895,152 +767,21 @@ function getMarketingPropertyInfo(propertyId, $scope, $http) {
 		if (resp.data.length != 0) {
 			$scope.marketingData = resp.data[0];
 			
-			$scope.marketingData["Price"] = numberWithCommas($scope.marketingData["Price"]);			
-			investmentAmount = $scope.marketingData["BuyPrice"];
-			salePrice = $scope.marketingData["SalePrice"];
-			salePrice = $scope.marketingData["SalePrice"];
-			purchaseCost = $scope.marketingData["PurchaseCost"];
-			closingCost = $scope.marketingData["ClosingCost"];
-			softCost= $scope.marketingData["SoftCost"];
-			investmentME = $scope.marketingData["InvestmentME"];
-			financing = $scope.marketingData["Financing"];
+			$scope.marketingData["Price"] = numberWithCommas($scope.marketingData["Price"]);
+			$scope.marketingData["AvailableDate"] = dateFormat($scope.marketingData["AvailableDate"]);
+			$scope.marketingData["OpenShowingDate"] = dateFormat($scope.marketingData["OpenShowingDate"]);
+			
 			address = $scope.marketingData["Address"];
 			rating = $scope.marketingData["Rating"];
 			
 			console.log($scope.marketingData);
 
-			drawInvestmentCostsCart(investmentAmount, purchaseCost, closingCost, softCost, investmentME, financing);
-			drawSensitivityAnalysisCart(investmentAmount, salePrice);
 			drawRating(rating);
-			capitalStructure($scope, investmentAmount, purchaseCost, closingCost, softCost, investmentME, financing);
 			darwGoogleMap(address);
 		} 
 	}, function(err) {
 	    console.error('ERR', err);
 	})
-}
-
-function getMarketSummaryImage(propertyId, $scope, $http) {
-	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Marketing/getMarketSummaryImage', 
-	    method: "GET",
-	    params:  {index:propertyId}, 
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-	}).then(function(resp) {
-		if (resp.data.length != 0) {
-			$scope.summaryImage = resp.data[0];
-			
-			$scope.summaryFileName = resp.data[0]["FileName"];
-			
-			//console.log("summaryImage", $scope.summaryImage);
-		} 
-	}, function(err) {
-	    console.error('ERR', err);
-	})
-}
-
-function getEntrepreneurImage(propertyId, $scope, $http) {
-	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Marketing/getEntrepreneurImage', 
-	    method: "GET",
-	    params:  {index:propertyId}, 
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-	}).then(function(resp) {
-		if (resp.data.length != 0) {
-			$scope.entrepreneurImage = resp.data[0];
-			
-			$scope.entrepreneurFileName = resp.data[0]["FileName"];
-			
-			//console.log("entrepreneurImage", $scope.entrepreneurImage);
-		} 
-	}, function(err) {
-	    console.error('ERR', err);
-	})
-}
-
-function drawInvestmentCostsCart(buySum, purchaseCost, closingCost, softCost, investmentME, financing ) {
-	
-	var svg = d3.select("div#investmentAmountCart").append("svg").attr("width", 150).attr("height", 160);
-
-	svg.append("g").attr("id", "salesDonut");
-
-	var val1 = purchaseCost/buySum;
-	var val2 = closingCost/buySum;
-	var val3 = softCost/buySum;
-	var val4 = investmentME/buySum;
-	var val5 = financing/buySum;
-	
-	Donut3D.draw("salesDonut", 
-			[ {label:"sss", value:val1, color:"#499FCE"}, 
-			  {label:"sss", value:val2, color:"#1B4A64"}, 
-			  {label:"sss", value:val3, color:"#A37E64"}, 
-			  {label:"sss", value:val4, color:"#662756"}, 
-			  {label:"aaa", value:val5, color:"#7F8354"}
-			], 70, 90, 70, 70, 0, 0.6);
-}
-
-function drawSensitivityAnalysisCart(buySum, saleSum) {
-	var income = saleSum - buySum;
-	var data = {
-		    labels: ["  -20%", "  -15%", "  -10%", "  -5%",  "   Base ", " 5%", " 10%", " 15%", " 20%"],
-		    datasets: [
-		        {
-		            label: "buySum",
-		            fillColor: "rgba(73,159,206,0.75)",
-		           // strokeColor: "rgba(73,159,206,0.8)",
-		            highlightFill: "rgba(73,159,206,0.75)",
-		            highlightStroke: "rgba(73,159,206,1)",
-		            data: [calcPercent(buySum, 20, "minus"), calcPercent(buySum, 15, "minus"), calcPercent(buySum, 10, "minus"), calcPercent(buySum, 5, "minus"), 
-		                   buySum, 
-		                   calcPercent(buySum, 5, "plus"), calcPercent(buySum, 10, "plus"), calcPercent(buySum, 15, "plus"), calcPercent(buySum, 20, "plus")]
-		        },
-		        {
-		            label: "saleSum",
-		            fillColor: "rgba(27,74,100,0.75)",
-		           // strokeColor: "rgba(27,74,100,0.8)",
-		            highlightFill: "rgba(27,74,100,0.75)",
-		            highlightStroke: "rgba(27,74,100,1)",
-		            data: [calcPercent(saleSum, 20, "minus"), calcPercent(saleSum, 15, "minus"), calcPercent(saleSum, 10, "minus"), calcPercent(saleSum, 5, "minus"), 
-		                   saleSum, 
-		                   calcPercent(saleSum, 5, "plus"), calcPercent(saleSum, 10, "plus"), calcPercent(saleSum, 15, "plus"), calcPercent(saleSum, 20, "plus")]
-		        },
-		        {
-		            label: "incomeSum",
-		            fillColor: "rgba(163,126,100,0.75)",
-		            //strokeColor: "rgba(163,126,100,0.8)",
-		            highlightFill: "rgba(163,126,100,0.75)",
-		            highlightStroke: "rgba(163,126,100,1)",
-		            data: [calcPercent(income, 20, "minus"), calcPercent(income, 15, "minus"), calcPercent(income, 10, "minus"), calcPercent(income, 5, "minus"), 
-		                   income, 
-		                   calcPercent(income, 5, "plus"), calcPercent(income, 10, "plus"), calcPercent(income, 15, "plus") , calcPercent(income, 20, "plus")]
-		        }
-		    ]
-		};
-
-		// Get the context of the canvas element we want to select
-		var ctx = document.getElementById("myChart").getContext("2d");
-		var option = { scaleShowGridLines : false, 
-				       scaleOverride : true,
-		        	   scaleSteps : 6,
-		               scaleStepWidth : 5000000,
-		               scaleStartValue : 0,
-		               showTooltips: false,
-		               onAnimationComplete: function () {
-
-		                   var ctx = this.chart.ctx;
-		                   ctx.font = this.scale.font;
-		                   ctx.fillStyle = this.scale.textColor
-		                   ctx.textAlign = "left";
-		                   ctx.textBaseline = "bottom";
-
-		                   this.datasets.forEach(function (dataset) {
-		                       dataset.bars.forEach(function (bar) {
-		                    	   ctx.fillText(Math.round( bar.value /1000000) + "M", bar.x+5, bar.y+7);
-		                       });
-		                   })
-		               }
-		             }	
-		var myBarChart = new Chart(ctx).HorizontalBar(data,  option);
 }
 
 function drawRating(rating) {
@@ -1061,28 +802,10 @@ function drawRating(rating) {
 	}
 }
 
-function capitalStructure($scope, investmentAmount, purchaseCost, closingCost, softCost, investmentME, financing) {
-	if(investmentAmount != "0") {
-		$scope.purchaseCostTotalPercent = Math.round(purchaseCost / investmentAmount * 100);
-		$scope.closingCostTotalPercent = Math.round(closingCost / investmentAmount * 100);
-		$scope.softCostTotalPercent = Math.round(softCost / investmentAmount * 100);
-		$scope.investmentMETotalPercent = Math.round(investmentME / investmentAmount * 100);
-		$scope.financingTotalPercent = Math.round(financing / investmentAmount * 100);
-		$scope.totalPercent = Math.round($scope.purchaseCostTotalPercent + $scope.closingCostTotalPercent + $scope.softCostTotalPercent + $scope.investmentMETotalPercent + $scope.financingTotalPercent);
-		
-		$scope.purchaseCostAmount =  $scope.purchaseCostTotalPercent * investmentAmount / 100;
-		$scope.closingCostAmount = $scope.closingCostTotalPercent * investmentAmount / 100;
-		$scope.softCostAmount = $scope.softCostTotalPercent * investmentAmount / 100;
-		$scope.investmentMEAmount = $scope.investmentMETotalPercent * investmentAmount / 100;
-		$scope.financingAmount = $scope.financingTotalPercent * investmentAmount / 100;
-		$scope.totalAmount = $scope.purchaseCostAmount + $scope.closingCostAmount + $scope.softCostAmount + $scope.investmentMEAmount + $scope.financingAmount;
-	}
-}
-
 function darwGoogleMap(address) {
 	var geocoder;
 	var map;
-	var address = address ;
+	var address = address;
     
 	geocoder = new google.maps.Geocoder();
 	var latlng = new google.maps.LatLng(-34.397, 150.644);
@@ -1129,127 +852,16 @@ function darwGoogleMap(address) {
     }
 }
 
-//get main bar values
-function getMainBarValues($scope, $http) {	
-    url = 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Property/getPropertiesROIChartAPI';
-	id = localStorage.getItem('id');
-	$http({
-	    url: url, 
-	    method: "GET",
-	    params:  {index:id}, 
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-	}).then(function(resp) {
-
-		$scope.propertyBar = [];
-
-		$scope.propertyBar = resp.data[0];
-		
-		var val = resp.data[0]['TotalReturn'] / resp.data[0]['InvestmentAmount'] * 100;
-		
-		$scope.propertyBar.InvestmentAmount = numberWithCommas($scope.propertyBar.InvestmentAmount);
-		$scope.propertyBar.TotalReturn = numberWithCommas($scope.propertyBar.TotalReturn);
-		
-		// bar
-		var div1 = d3.select(document.getElementById('div1'));
-		start();
-
-		function onClick1() {
-		    deselect();
-		}
-
-		function labelFunction(val,min,max) {
-
-		}
-
-		function deselect() {
-		    //div1.attr("class","radial");
-		}
-
-		function start() {
-			$('.label').val("sghdsfhsdf");
-		    var rp1 = radialProgress(document.getElementById('div1'))
-		            .label("ROI")
-		            .onClick(onClick1)
-		            .value(val)
-		            .render();
-		}
-	
-	}, function(err) {
-	    console.error('ERR', err);
-	})
-}
-
-//get properties for 'your properties' section
-function getPropertiesForYourPropertiesSection($scope, $rootScope, $http) {	
-	if(localStorage.getItem("loginUserType") == "client") {    	
-    	url = 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/PropertyImage';
-    	id = localStorage.getItem('id');
-    	return $http({
-    	    url: url, 
-    	    method: "GET",
-    	    params:  {index:id}, 
-    	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    	}).then(function(resp) {
-
-    		$scope.propertyImage = [];
-    		$scope.propertyImage = resp.data;
-    		
-    		$rootScope.propertyCnt = resp.data.length;
-    		
-    		addClass($scope.propertyImage);
-    		
-    	}, function(err) {
-    	    console.error('ERR', err);
-    	})
-    }
-}
-
-//get properties for 'special deals section'
-function getPropertiesForSpecialDealsSection($scope, $http) {
-	if(localStorage.getItem("loginUserType") == "client") {    	
-		url = 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/PropertyImage/getSpecialDealsPropertyImage';
-		id = localStorage.getItem('id');
-		return $http({
-		    url: url, 
-		    method: "GET",
-		    params:  {index:id}, 
-		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-		}).then(function(resp) {
-	
-			$scope.specialPropertyImage = [];
-			$scope.specialPropertyImage = resp.data;
-	
-			console.log("$scope.specialPropertyImage", $scope.specialPropertyImage);
-			
-			addClass($scope.specialPropertyImage);
-			
-		}, function(err) {
-		    console.error('ERR', err);
-		})
-	}
-}
-
 function getMarketingDetailsPageData(propertyId, $scope, $http, $q) {
 	return $q.all([getAllMarketingPropertyImages(propertyId, $scope, $http),
-	               getMarketingPropertyInfo(propertyId, $scope, $http),
-	               getMarketSummaryImage(propertyId, $scope, $http),
-	               getEntrepreneurImage(propertyId, $scope, $http)]).
+	               getMarketingPropertyInfo(propertyId, $scope, $http)]).
 	                then(function(results) {
 		$scope.isMarketingDetailsLoading = false;
 	});
 }
 
-function getOverviewPageData($scope, $rootScope, $http, $q) {	 
-	return $q.all([getPropertiesForYourPropertiesSection($scope, $rootScope, $http), 
-	               getPropertiesForSpecialDealsSection($scope, $http)]).
-	                then(function(results) {
-		$scope.isOverviewLoading = false;
-	});
-}
-
 function getOverviewDetailsPageData(propertyId, $scope, $http, $q) {
 	return $q.all([getPropertyImage(propertyId, $scope, $http),
-	               getPropertyChart(propertyId, $scope, $http),
 	               getPurchaseDetails(propertyId,$scope, $http), 
 	               getClosingDetails(propertyId, $scope, $http),
 	               getRenovationDetails(propertyId, $scope, $http), 
