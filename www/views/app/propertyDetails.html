@@ -8,7 +8,7 @@
 			<ion-slide-box ng-if="allImages">
 		   	<ion-slide ng-repeat="propertyImg in allImages" >
 			    <div class="animated fadeInLeft propertyImg" 
-			    ng-style="{'background-image':'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/uploads/{{ propertyImg.FileName }})'}">		    
+			    ng-style="{'background-image':'url(http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/S_uploads/{{ propertyImg.FileName }})'}">		    
 			    </div>
 			  </ion-slide>	   	
 		   	</ion-slide-box>
@@ -16,125 +16,17 @@
 		
 		<div class="propertyName">{{allImages[0].PropertyName}}</div>
 	</div>	
-	
-	<div ng-show="!isPropertyDetailsLoading">
-		<div class="chart">
-			<div id='outer' >
-			    <div id="main" style="width: 140px;">
-			        <div id="div2"></div>
-			    </div>
-			</div>
-			
-			<div id="barValueDiv2">
-				<ul>
-					<li>
-						<span class="totlaInvestmentTitleDiv2">Total Investment:</span>
-						<span class="totlaInvestmentDiv2">{{propertyChart.InvestmentAmount}}</span>					
-					</li>
-					<li>
-						<span class="totalReturnsTitleDiv2">Total Returns:</span>
-						<span class="totalReturnsDiv2">{{propertyChart.TotalReturn}}</span>	
-					</li>
-					<li>
-						<span class="totlaTimeTitle">Total Time:</span>
-						<span class="totlaTime">{{month}}</span>					
-					</li>
-					<li>
-						<span class="currentYieldTitle line_40">Yield:</span>
-						<span class="currentYield line_40">{{currentYield}}</span>					
-					</li>				
-				</ul>					
-			</div>
-		</div>
 		
-		<hr class="propertyDetails">
-	</div>
+	<hr class="propertyDetails">	
 		
 	<div ng-if="!isPropertyDetailsLoading">	
-		<!-- START Purchase -->
+		<!-- START Rent -->
 		<div class="section" ng-click="click(1)">
-			<h3 class="sectionTitle" ng-class="showPurchase == 1 ? 'lightBlue' : ''">Purchase And Sale</h3>
+	 		<h3 class="sectionTitle" ng-class="showRent == 1 ? 'lightBlue' : ''">Rent</h3>
 			<i class="icon pointer arrow" 
-			ng-class="showPurchase == 1 ? 'animated fadeIn ion-chevron-up' : 'animated fadeIn ion-chevron-down'"></i> 
-			<div ng-if="showPurchase == 1" ng-class="showPurchase == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
-				<ul class="propertyDetails">
-					<li>
-						<span>Buyer Name</span>
-						<span>{{purchaseAndSale['BuyerName']}}</span>
-					</li>
-					<li>
-						<span>Is Funds In Escrow</span>
-						<span>{{purchaseAndSale['IsFundsInEscrow'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Escrow Attorney</span>
-						<span>{{purchaseAndSale['EscrowAttorney']}}</span>
-					</li>
-					<li>
-						<span>Closing Date</span>
-						<span>{{purchaseAndSale['ClosignDate']}}</span>
-					</li>
-					<li>
-						<span>Layer Name</span>
-						<span>{{purchaseAndSale['LayerName']}}</span>
-					</li>
-					<li>
-						<span>Balance</span>
-						<span>{{purchaseAndSale['Balance']}}</span>
-					</li>
-					<li>
-						<span>Closed</span>
-						<span>{{purchaseAndSale['Closed']}}</span>
-					</li>
-					<li ng-show="showPurchaseNote" >
-						<span>Note</span>
-						<p class="note">{{purchaseAndSale['Note']}}</p>	
-					</li>
-				</ul>					
-			</div>
-		</div>
-		<!-- END Purchase -->
-		
-		<hr class="propertyDetails">
-		
-		<!-- START Closing -->
-	 	<div class="section" ng-click="click(2)">
-	 		<h3 class="sectionTitle" ng-class="showClosing == 1 ? 'lightBlue' : ''">Closing</h3>
-			<i class="icon pointer arrow" 
-			ng-class="showClosing == 1 ? 'animated fadeIn ion-chevron-up' : 'animated fadeIn ion-chevron-down'"></i>  
+			ng-class="showRent == 1 ? 'animated fadeIn ion-chevron-up' : 'animated fadeIn ion-chevron-down'"></i>  
 	
-			<div ng-if="showClosing == 1" ng-class="showClosing == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
-				<ul class="propertyDetails">
-					<li>
-						<span>PW File Open</span>
-						<span>{{closing['PWFileOpen'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Walk Throgh</span>
-						<span>{{closing['WalkThrogh'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Insurance</span>
-						<span>{{closing['Insurance'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li ng-show="showClosingNote" >
-						<span>Note</span>
-						<p class="note">{{closing['Note']}}</p>
-					</li>
-				</ul>			
-			</div>
-	    </div>     
-	 	<!-- END Closing --> 
-		
-		<hr class="propertyDetails">
-		
-	 	<!-- START Renovation --> 
-	 	<div class="section" ng-click="click(3)"> 
-	 		<h3 class="sectionTitle" ng-class="showRenovation == 1 ? 'lightBlue' : ''">Renovation</h3>
-			<i class="icon pointer arrow" 
-			ng-class="showRenovation == 1 ? 'animated fadeIn ion-chevron-up' : 'animated fadeIn ion-chevron-down'"></i>  
-	
-			<div ng-if="showRenovation == 1" ng-class="showRenovation == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
+			<div ng-if="showRent == 1" ng-class="showRent == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
 				<ul class="propertyDetails">
 					<li>
 						<span>Is Sent Funds</span>
@@ -183,154 +75,59 @@
 				</ul>			
 			</div>  
 	 	</div> 
-	 	<!-- END Renovation --> 
+	 	<!-- END Rent --> 
 		
 		<hr class="propertyDetails">
 		
-	 	<!-- START Leasing --> 
-	 	<div class="section" ng-click="click(4)"> 
-	 		<h3 class="sectionTitle" ng-class="showLeasing == 1 ? 'lightBlue' : ''">Leasing</h3>
+	 	<!-- START Lease --> 
+	 	<div class="section" ng-click="click(2)"> 
+	 		<h3 class="sectionTitle" ng-class="showLease == 1 ? 'lightBlue' : ''">Lease</h3>
 			<i class="icon pointer arrow" 
-			ng-class="showLeasing == 1 ? 'animated fadeIn ion-chevron-up' : 'animated fadeIn ion-chevron-down'"></i>  
-			<div ng-if="showLeasing == 1" ng-class="showLeasing == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
+			ng-class="showLease == 1 ? 'animated fadeIn ion-chevron-up' : 'animated fadeIn ion-chevron-down'"></i>  
+			<div ng-if="showLease == 1" ng-class="showLease == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
 				<ul class="propertyDetails">
 					<li>
-						<span>Ready To Rent</span>
-						<span>{{leasing['ReadyToRent'] == 1 ? "Yes" : "No"}}</span>
+						<span>Lease Start Date</span>
+						<span>{{lease['LeaseStartDate']}}</span>
 					</li>
 					<li>
-						<span>Start Date</span>
-						<span>{{leasing['StartDate']}}</span>
-					</li>
-					<li>
-						<span>Estimate Rent Date</span>
-						<span>{{leasing['EstimateRentDate']}}</span>
-					</li>
-					<li>
-						<span>Listing On Facebook</span>
-						<span>{{leasing['ListingOnFacebook']}}</span>
-					</li>
-					<li>
-						<span>Listing On Craigs list</span>
-						<span>{{leasing['ListingOnCraigslist']}}</span>
-					</li>
-					<li>
-						<span>Application</span>
-						<span>{{leasing['Application'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Move In Date</span>
-						<span>{{leasing['MoveInDate']}}</span>
-					</li>
-					<li ng-show="showLeasingNote" >
-						<span>Note</span>
-						<p class="note">{{leasing['Note']}}</p>
+						<span>Lease End Date</span>
+						<span>{{lease['LeaseEndDate']}}</span>
 					</li>
 				</ul>			
 			</div>
 	 	</div> 
-	 	<!-- END Leasing --> 
-		
-		<hr class="propertyDetails">
-		
-	 	<!-- START Occupied --> 
-	 	<div class="section" ng-click="click(5)">
-	 		<h3 class="sectionTitle" ng-class="showOccupied == 1 ? 'lightBlue' : ''">Occupied Property</h3>
-			<i class="icon pointer arrow" 
-			ng-class="showOccupied == 1 ? 'animated fadeIn ion-chevron-up' : 'animated fadeIn ion-chevron-down'"></i>   
-	
-			<div ng-if="showOccupied == 1" ng-class="showOccupied == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
-				<ul class="propertyDetails">
-					<li>
-						<span>Portion</span>
-						<span>{{occupied['Portion']}}</span>
-					</li>
-					<li>
-						<span>Tenants Portion</span>
-						<span>{{occupied['TenantsPortion']}}</span>
-					</li>
-					<li>
-						<span>Payment Status</span>
-						<span>{{occupied['PaymentStatus']}}</span>
-					</li>
-					<li>
-						<span>Outstanding Balance</span>
-						<span>{{occupied['OutstandingBalance']}}</span>
-					</li>
-					<li>
-						<span>Maintanence</span>
-						<span>{{occupied['Maintanence']}}</span>
-					</li>
-					<li>
-						<span>Eviction</span>
-						<span>{{occupied['Eviction'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Eviction Date</span>
-						<span>{{occupied['EvictionDate']}}</span>
-					</li>
-					<li>
-						<span>Eviction Note</span>
-						<p class="evictionNote">{{occupied['EvictionNote']}}</p>
-					</li>
-					<li>
-						<span>Going To Be Vacent</span>
-						<span>{{occupied['GoingToBeVacent']}}</span>
-					</li>
-					<li ng-show="showOccupiedNote">
-						<span>Note</span>
-						<p class="note">{{occupied['Note']}}</p>
-					</li>
-				</ul>			
-			</div>
-	 	</div> 
-	 	<!-- END Occupied --> 
+	 	<!-- END Lease --> 
 		
 		<hr class="propertyDetails">
 		
 	 	<!-- START Eviction --> 
-	 	<div class="section" ng-click="click(6)"> 
+	 	<div class="section" ng-click="click(3)"> 
 	 		<h3 class="sectionTitle" ng-class="showEviction == 1 ? 'lightBlue' : ''">Eviction</h3>
 			<i class="icon pointer arrow" 
 			ng-class="showEviction == 1 ? 'animated fadeIn ion-chevron-up' : 'animated fadeIn ion-chevron-down'"></i>   
 			<div ng-if="showEviction == 1" ng-class="showEviction == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
 				<ul class="propertyDetails">
 					<li>
-						<span>Tenant Name</span>
-						<span>{{eviction['TenantName']}}</span>
+						<span>Out Standing Balance</span>
+						<span>{{eviction['OutStandingBalance']}}</span>
 					</li>
-					<li>
-						<span>Filed</span>
-						<span>{{eviction['Filed'] == 1 ? "Yes" : "No"}}</span>
+					<li ng-show="isEvictionField">
+						<span>Eviction Field Date</span>
+						<span>{{eviction['EvictionField']}}</span>
 					</li>
-					<li>
-						<span>Published</span>
-						<span>{{eviction['Published'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Is Court Date</span>
-						<span>{{eviction['IsCourtDate'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
+					<li ng-show="isCourtDate">
 						<span>Court Date</span>
 						<span>{{eviction['CourtDate']}}</span>
 					</li>
-					<li>
-						<span>Outcome And Status</span>
-						<span>{{eviction['OutcomeAndStatus']}}</span>
+					<li ng-show="isLockOut">
+						<span>Lock Out Date</span>
+						<span>{{eviction['LockOut']}}</span>
 					</li>
 					<li>
-						<span>Is Removed</span>
-						<span>{{eviction['IsRemoved'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Removed Date</span>
-						<span>{{eviction['RemovedDate']}}</span>
-					</li>
-					<li ng-show="showEvictionNote" >
 						<span>Note</span>
-						<p class="note">{{eviction['Note']}}</p>
-					</li>
+						<span>{{eviction['Notes']}}</span>
+					</li>					
 				</ul>			
 			</div>      
 	 	</div> 

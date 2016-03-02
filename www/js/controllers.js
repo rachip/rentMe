@@ -346,11 +346,8 @@ angular.module('starter.controllers', ['firebase'])
 .controller('PropertyDetailsCtrl', function($scope, $ionicScrollDelegate, $http, $rootScope, 
 			$timeout, $q, $ionicPopup) {
 	
-	$scope.showPurchase = 0;
-	$scope.showClosing = 0;
-	$scope.showRenovation = 0;
-	$scope.showLeasing = 0;
-	$scope.showOccupied = 0;
+	$scope.showRent = 0;
+	$scope.showLease = 0;
 	$scope.showEviction = 0;
 	
 	$scope.requestPopup = 0;
@@ -360,7 +357,7 @@ angular.module('starter.controllers', ['firebase'])
 	
 	var propertyId = 1;
 	
-		propertyId = data.PropertyId;	
+		//propertyId = data.PropertyId;	
 		var promise = getOverviewDetailsPageData(propertyId, $scope, $http, $q);
 		promise.then(function() {
 		}, function() {
@@ -370,21 +367,12 @@ angular.module('starter.controllers', ['firebase'])
 	$scope.click = function(section) {		
 		switch(section){
 			case 1:
-				$scope.showPurchase = ($scope.showPurchase) ? 0 : 1;
+				$scope.showRent = ($scope.showRent) ? 0 : 1;
 				break;
 			case 2:
-				$scope.showClosing = ($scope.showClosing) ? 0 : 1;
+				$scope.showLease = ($scope.showLease) ? 0 : 1;
 				break;
 			case 3:
-				$scope.showRenovation = ($scope.showRenovation) ? 0 : 1;
-				break;
-			case 4:
-				$scope.showLeasing = ($scope.showLeasing) ? 0 : 1;
-				break;
-			case 5:
-				$scope.showOccupied = ($scope.showOccupied) ? 0 : 1;
-				break;
-			case 6:
 				$scope.showEviction = ($scope.showEviction) ? 0 : 1;
 				break;
 		}		
@@ -424,7 +412,7 @@ angular.module('starter.controllers', ['firebase'])
 		
 		if(showAlert) {
 			var alertPopup = $ionicPopup.alert({
-			     title: 'Update ME',
+			     title: 'Fix ME',
 			     template: 'Your request for update was sent to the office'
 			   });
 			   alertPopup.then(function(res) {
@@ -440,7 +428,6 @@ angular.module('starter.controllers', ['firebase'])
 	};
 })
 
-
 .controller('DashCtrl', function($scope) {})
 
 .controller('AccountCtrl', function($scope) {
@@ -450,9 +437,8 @@ angular.module('starter.controllers', ['firebase'])
 })
 
 function getPropertyImage(propertyId, $scope, $http) {	
-	console.log("getPropertyImage function" + propertyId);
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/PropertyImage/getAllPropertyImages', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_PropertyImage/getPropertyImageAPI', 
 	    method: "GET",
 	    params:  {PropertyId: propertyId}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -465,56 +451,7 @@ function getPropertyImage(propertyId, $scope, $http) {
 	})
 }
 
-function getPurchaseDetails(propertyId, $scope, $http) {
-	console.log("getPurchaseDetails function");
-	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/PurchaseAndSale', 
-	    method: "GET",
-	    params:  {index: propertyId}, 
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-	}).then(function(resp) {
-		if (resp.data.length != 0) {
-			
-			$scope.purchaseAndSale = resp.data[0];
-			
-			$scope.purchaseAndSale['ClosignDate'] = dateFormat($scope.purchaseAndSale['ClosignDate']);
-			$scope.purchaseAndSale['Closed'] = dateFormat($scope.purchaseAndSale['Closed']);
-			
-			$scope.isHasPurchaseFile = $scope.purchaseAndSale['IsHasFile'] == 1 ? true : false;
-			$scope.IsBuyerFile = $scope.purchaseAndSale['IsBuyerFile'] == 1 ? true : false;
-			$scope.IsSignedDocsFile = $scope.purchaseAndSale['IsSignedDocsFile'] == 1 ? true : false;
-			$scope.IsBalanceFile = $scope.purchaseAndSale['IsBalanceFile'] == 1 ? true : false;
-			$scope.IsFilesTo = $scope.purchaseAndSale['IsFilesToS‌ignFile'] == 1 ? true : false;
-			$scope.showPurchaseNote = $scope.purchaseAndSale['ShowNote'] == 1 ? true : false;
-		} 		
-	}, function(err) {
-	    console.error('ERR', err);
-	})
-}
-
-function getClosingDetails(propertyId, $scope, $http) {
-	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Closing', 
-	    method: "GET",
-	    params:  {index:propertyId}, 
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-	}).then(function(resp) {
-		if (resp.data.length != 0) {
-			
-			$scope.closing = resp.data[0];
-
-			$scope.IsClosingHasFile = $scope.closing['IsHasFile'] == 1 ? true : false;
-			$scope.IsWalkThroghFile = $scope.closing['IsWalkThroghFile'] == 1 ? true : false;
-			$scope.IsInsuranceFile = $scope.closing['IsInsuranceFile'] == 1 ? true : false;
-			$scope.IsClosingDocsFile = $scope.closing['IsClosingDocsFile'] == 1 ? true : false;
-			$scope.showClosingNote = $scope.closing['ShowNote'] == 1 ? true : false;
-		} 
-	}, function(err) {
-	    console.error('ERR', err);
-	})
-}
-
-function getRenovationDetails(propertyId, $scope, $http) {
+function getRentDetails(propertyId, $scope, $http) {
 	return $http({
 	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Renovation', 
 	    method: "GET",
@@ -543,56 +480,28 @@ function getRenovationDetails(propertyId, $scope, $http) {
 	})
 }
 
-function getLeasingDetails(propertyId, $scope, $http) {
+function getLeaseDetails(propertyId, $scope, $http) {
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Leasing', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Lease', 
 	    method: "GET",
 	    params:  {index:propertyId}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 	}).then(function(resp) {
 		if (resp.data.length != 0) {
 		
-			$scope.leasing = resp.data[0];
+			$scope.lease = resp.data[0];
 		
-			$scope.leasing['StartDate'] = dateFormat($scope.leasing['StartDate']);
-			$scope.leasing['EstimateRentDate'] = dateFormat($scope.leasing['EstimateRentDate']);
-			$scope.leasing['MoveInDate'] = dateFormat($scope.leasing['MoveInDate']);
-			
-			$scope.IsHasLeasingFile = $scope.leasing['IsHasFile'] == 1 ? true : false;
-			$scope.IsApplicationFile = $scope.leasing['IsApplicationFile'] == 1 ? true : false;
-			$scope.IsLeaseFile = $scope.leasing['IsLeaseFile'] == 1 ? true : false;
-			$scope.showLeasingNote = $scope.leasing['ShowNote'] == 1 ? true : false;
+			$scope.lease['LeaseStartDate'] = dateFormat($scope.lease['LeaseStartDate']);
+			$scope.lease['LeaseEndDate'] = dateFormat($scope.lease['LeaseEndDate']);
 		}		
 	}, function(err) {
 	    console.error('ERR', err);
 	})	
 }
 
-function getOccupiedDetails(propertyId, $scope, $http) {
-	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Occupied', 
-	    method: "GET",
-	    params:  {index:propertyId}, 
-	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-	}).then(function(resp) {
-		if (resp.data.length != 0) {
-		
-			$scope.occupied = resp.data[0];
-			$scope.occupied['EvictionDate'] = dateFormat($scope.occupied['EvictionDate']);
-			$scope.occupied['GoingToBeVacent'] = dateFormat($scope.occupied['GoingToBeVacent']);
-			
-			$scope.IsHasOccupiedFile = $scope.occupied['IsHasFile'] == 1 ? true : false;
-			$scope.IsMaintanenceFile = $scope.occupied['IsMaintanenceFile'] == 1 ? true : false;
-			$scope.showOccupiedNote = $scope.occupied['ShowNote'] == 1 ? true : false;
-		}
-	}, function(err) {
-	    console.error('ERR', err);
-	})
-}
-
 function getEvictionDetails(propertyId, $scope, $http) {
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Eviction', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Eviction', 
 	    method: "GET",
 	    params:  {index:propertyId}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -601,11 +510,16 @@ function getEvictionDetails(propertyId, $scope, $http) {
 			
 			$scope.eviction = resp.data[0];
 
-			$scope.eviction['CourtDate'] = dateFormat($scope.eviction['CourtDate']);
-			$scope.eviction['RemovedDate'] = dateFormat($scope.eviction['RemovedDate']);
+			$scope.eviction["OutStandingBalance"] = numberWithCommas($scope.eviction["OutStandingBalance"]);
 			
-			$scope.IsHasEvictionFile = $scope.eviction['IsHasFile'] == 1 ? true : false;
-			$scope.showEvictionNote = $scope.eviction['ShowNote'] == 1 ? true : false;
+			$scope.eviction['CourtDate'] = dateFormat($scope.eviction['CourtDate']);
+			$scope.eviction['LockOut'] = dateFormat($scope.eviction['LockOut']);
+			$scope.eviction['EvictionField'] = dateFormat($scope.eviction['EvictionField']);
+			
+			$scope.isCourtDate = $scope.eviction['IsCourtDate'] == 1 ? true : false;
+			$scope.isLockOut = $scope.eviction['IsLockOut'] == 1 ? true : false;
+			$scope.isEvictionField = $scope.eviction['IsEvictionField'] == 1 ? true : false;
+			
 		} 
 	}, function(err) {
 	    console.error('ERR', err);
@@ -733,8 +647,8 @@ function getJacksonvilleProperties($scope, $http) {
 function getProperties($scope, $http, $q) {	 
 	return $q.all([getRochesterProperties($scope, $http), 
 	               getClevelandProperties($scope, $http), 
-	                getColumbusProperties($scope, $http), 
-	                getJacksonvilleProperties($scope, $http)]).
+	               getColumbusProperties($scope, $http), 
+	               getJacksonvilleProperties($scope, $http)]).
 	                then(function(results) {
 		$scope.isRouteLoading = false;
 	});
@@ -862,11 +776,8 @@ function getMarketingDetailsPageData(propertyId, $scope, $http, $q) {
 
 function getOverviewDetailsPageData(propertyId, $scope, $http, $q) {
 	return $q.all([getPropertyImage(propertyId, $scope, $http),
-	               getPurchaseDetails(propertyId,$scope, $http), 
-	               getClosingDetails(propertyId, $scope, $http),
-	               getRenovationDetails(propertyId, $scope, $http), 
-	               getLeasingDetails(propertyId, $scope, $http),
-	               getOccupiedDetails(propertyId, $scope, $http),
+	               //getRentDetails(propertyId, $scope, $http), 
+	               getLeaseDetails(propertyId, $scope, $http),
 	               getEvictionDetails(propertyId, $scope, $http)]).
 	                then(function(results) {
 		$scope.isPropertyDetailsLoading = false;
