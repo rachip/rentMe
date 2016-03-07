@@ -17,9 +17,10 @@
 		<div class="propertyName">{{allImages[0].PropertyName}}</div>
 	</div>	
 		
-	<hr class="propertyDetails">	
-		
 	<div ng-if="!isPropertyDetailsLoading">	
+		
+		<hr class="propertyDetails">	
+	
 		<!-- START Rent -->
 		<div class="section" ng-click="click(1)">
 	 		<h3 class="sectionTitle" ng-class="showRent == 1 ? 'lightBlue' : ''">Rent</h3>
@@ -29,48 +30,57 @@
 			<div ng-if="showRent == 1" ng-class="showRent == 1 ? 'animated fadeIn' : 'animated fadeOutUp'">
 				<ul class="propertyDetails">
 					<li>
-						<span>Is Sent Funds</span>
-						<span>{{renovation['IsSentFunds'] == 1 ? "Yes" : "No"}}</span>
+						<span>Monthly Rent</span>
+						<span>${{rent['MonthlyRent']}}</span>
 					</li>
 					<li>
-						<span>Funds Sent</span>
-						<span>{{renovation['FundsSent']}}</span>
+						<span>Payment Made</span>
+						<span>${{rent['PaymentMadeSum']}}</span>
 					</li>
 					<li>
-						<span>Work Estimate</span>
-						<span>{{renovation['WorkEstimate']}}</span>
+						<span>Out Standing Balance</span>
+						<span>${{rent['OutstandingBalance']}}</span>
 					</li>
 					<li>
-						<span>Start Date</span>
-						<span>{{renovation['StartDate']}}</span>
+						<span>Payment Plan</span>
+						<span>{{rent['PaymentPlan'] == 1 ? "Yes" : "No"}}</span>
+					</li>
+					<li ng-if="rent.PaymentPlan == 1">
+						<span>Payment Plan Schedule</span>
+						<div ng-if="rent.PaymentSum1 != 0">
+							<div class="dinline bold calign width_30pe">Date</div>
+							<div class="dinline bold calign width_30pe">Sum</div>
+							<div class="dinline bold calign width_30pe">Paid</div>
+						</div>
+						<div ng-if="rent.PaymentSum1 != 0">
+							<div class="dinline calign width_30pe">{{rent['PaymentDate1']}}</div>
+							<div class="dinline calign width_30pe">${{rent['PaymentSum1']}}</div>
+							<div class="dinline calign width_30pe">{{rent['IsPaid1'] == 1 ? "Yes" : "No"}}</div>
+						</div>
+						<div ng-if="rent.PaymentSum2 != 0">
+							<div class="dinline calign width_30pe">{{rent['PaymentDate2']}}</div>
+							<div class="dinline calign width_30pe">${{rent['PaymentSum2']}}</div>
+							<div class="dinline calign width_30pe">{{rent['IsPaid2'] == 1 ? "Yes" : "No"}}</div>
+						</div>
+						<div ng-if="rent.PaymentSum3 != 0">
+							<div class="dinline calign width_30pe">{{rent['PaymentDate3']}}</div>
+							<div class="dinline calign width_30pe">${{rent['PaymentSum3']}}</div>
+							<div class="dinline calign width_30pe">{{rent['IsPaid3'] == 1 ? "Yes" : "No"}}</div>
+						</div>
+						<div ng-if="rent.PaymentSum4 != 0">
+							<div class="dinline calign width_30pe">{{rent['PaymentDate4']}}</div>
+							<div class="dinline calign width_30pe">${{rent['PaymentSum4']}}</div>
+							<div class="dinline calign width_30pe">{{rent['IsPaid4'] == 1 ? "Yes" : "No"}}</div>
+						</div>
+						<div ng-if="rent.PaymentSum5 != 0">
+							<div class="dinline calign width_30pe">{{rent['PaymentDate5']}}</div>
+							<div class="dinline calign width_30pe">${{rent['PaymentSum5']}}</div>
+							<div class="dinline calign width_30pe">{{rent['IsPaid5'] == 1 ? "Yes" : "No"}}</div>
+						</div>
 					</li>
 					<li>
-						<span>End Date</span>
-						<span>{{renovation['FinishDate']}}</span>
-					</li>
-					<li>
-						<span>First Payment</span>
-						<span>{{renovation['Payment1'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Second Payment</span>
-						<span>{{renovation['Payment2'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>Third Payment</span>
-						<span>{{renovation['Payment3'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>CofO</span>
-						<span>{{renovation['CofO'] == 1 ? "Yes" : "No"}}</span>
-					</li>
-					<li>
-						<span>CofO Date</span>
-						<span>{{renovation['CofODate']}}</span>
-					</li>
-					<li ng-show="showRenovationNote" >
 						<span>Note</span>
-						<p class="note">{{renovation['Note']}}</p>
+						<span>{{rent['Note']}}</span>
 					</li>
 				</ul>			
 			</div>  
@@ -110,7 +120,7 @@
 				<ul class="propertyDetails">
 					<li>
 						<span>Out Standing Balance</span>
-						<span>{{eviction['OutStandingBalance']}}</span>
+						<span>${{eviction['OutStandingBalance']}}</span>
 					</li>
 					<li ng-show="isEvictionField">
 						<span>Eviction Field Date</span>
@@ -142,45 +152,24 @@
 			</div>
 			<ul class="propertyDetails">
 				<li>
-					<span>Purchase and Sale</span>	
+					<span>Rent</span>	
 					<span class="checkboxFive">
-						<input type="checkbox" id="checkboxFiveInput" ng-model="Info.PurchasesAndSales"/>
+						<input type="checkbox" id="checkboxFiveInput" ng-model="Info.S_Rent"/>
 						<label for="checkboxFiveInput"></label>
 					</span>
 				</li>
 				<li>
-					<span>Closing</span>
+					<span>Lease</span>
 					<span class="checkboxFive">
-						<input type="checkbox" id="checkboxFiveInput1" ng-model="Info.Closing">
+						<input type="checkbox" id="checkboxFiveInput1" ng-model="Info.S_Lease">
 						<label for="checkboxFiveInput1"></label>
-					</span>
-				</li>
-				<li>
-					<span>Renovation</span>
-					<span class="checkboxFive">
-						<input type="checkbox" id="checkboxFiveInput2" ng-model="Info.Renovations">
-						<label for="checkboxFiveInput2"></label>
-					</span>
-				</li>
-				<li>
-					<span>Leasing</span>
-					<span class="checkboxFive">
-						<input type="checkbox" id="checkboxFiveInput3" ng-model="Info.Leasing">
-						<label for="checkboxFiveInput3"></label>
-					</span>
-				</li>
-				<li>
-					<span>Occupied Property</span>
-					<span class="checkboxFive">
-						<input type="checkbox" id="checkboxFiveInput4" ng-model="Info.OccupiedProperty">
-						<label for="checkboxFiveInput4"></label>
 					</span>
 				</li>
 				<li>
 					<span>Eviction</span>
 					<span class="checkboxFive">
-						<input type="checkbox" id="checkboxFiveInput5" ng-model="Info.Evictions">
-						<label for="checkboxFiveInput5"></label>
+						<input type="checkbox" id="checkboxFiveInput2" ng-model="Info.S_Eviction">
+						<label for="checkboxFiveInput2"></label>
 					</span>
 				</li>
 				<li>

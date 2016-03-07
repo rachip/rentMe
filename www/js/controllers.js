@@ -355,7 +355,7 @@ angular.module('starter.controllers', ['firebase'])
 	
 	$rootScope.isPropertyDetailsLoading = true;
 	
-	var propertyId = 1;
+	var propertyId = 3;
 	
 		//propertyId = data.PropertyId;	
 		var promise = getOverviewDetailsPageData(propertyId, $scope, $http, $q);
@@ -392,7 +392,7 @@ angular.module('starter.controllers', ['firebase'])
 			if($scope.Info[i]) {
 				showAlert = true;
 				$http({
-		    	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/RequestUpdate', 
+		    	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_RequestUpdate', 
 		    	    method: "GET",
 		    	    params:  { id:propertyId, table:i }, 
 		    	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
@@ -453,27 +453,22 @@ function getPropertyImage(propertyId, $scope, $http) {
 
 function getRentDetails(propertyId, $scope, $http) {
 	return $http({
-	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/api/Renovation', 
+	    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Rent', 
 	    method: "GET",
 	    params:  {index:propertyId}, 
 	    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 	}).then(function(resp) {
 		if (resp.data.length != 0) {
 			
-			$scope.renovation = resp.data[0];
+			$scope.rent = resp.data[0];
 		
-			$scope.renovation['StartDate'] = dateFormat($scope.renovation['StartDate']);
-			$scope.renovation['FinishDate'] = dateFormat($scope.renovation['FinishDate']);
-			$scope.renovation['CofODate'] = dateFormat($scope.renovation['CofODate']);
-			
-			$scope.IsHasRenovationFile = $scope.renovation['IsHasFile'] == 1 ? true : false;
-			$scope.IsFundsSentFile = $scope.renovation['IsFundsSentFile'] == 1 ? true : false;
-			$scope.IsWorkEstimateFile = $scope.renovation['IsWorkEstimateFile'] == 1 ? true : false;
-			$scope.IsPayment1File = $scope.renovation['IsPayment1File'] == 1 ? true : false;
-			$scope.IsPayment2File = $scope.renovation['IsPayment2File'] == 1 ? true : false;
-			$scope.IsPayment3File = $scope.renovation['IsPayment3File'] == 1 ? true : false;
-			$scope.IsCOFOFile = $scope.renovation['IsCOFOFile'] == 1 ? true : false;
-			$scope.showRenovationNote = $scope.renovation['ShowNote'] == 1 ? true : false;
+			$scope.rent['PaymentMadeSum'] = numberWithCommas($scope.rent['PaymentMadeSum']);
+			$scope.rent['OutstandingBalance'] = ($scope.rent['OutstandingBalance'] != '0') ? numberWithCommas($scope.rent['OutstandingBalance']) : 0;
+			$scope.rent['PaymentDate1'] = dateFormat($scope.rent['PaymentDate1']);
+			$scope.rent['PaymentDate2'] = dateFormat($scope.rent['PaymentDate2']);
+			$scope.rent['PaymentDate3'] = dateFormat($scope.rent['PaymentDate3']);
+			$scope.rent['PaymentDate4'] = dateFormat($scope.rent['PaymentDate4']);
+			$scope.rent['PaymentDate5'] = dateFormat($scope.rent['PaymentDate5']);
 		} 
 	}, function(err) {
 	    console.error('ERR', err);
@@ -776,7 +771,7 @@ function getMarketingDetailsPageData(propertyId, $scope, $http, $q) {
 
 function getOverviewDetailsPageData(propertyId, $scope, $http, $q) {
 	return $q.all([getPropertyImage(propertyId, $scope, $http),
-	               //getRentDetails(propertyId, $scope, $http), 
+	               getRentDetails(propertyId, $scope, $http), 
 	               getLeaseDetails(propertyId, $scope, $http),
 	               getEvictionDetails(propertyId, $scope, $http)]).
 	                then(function(results) {
