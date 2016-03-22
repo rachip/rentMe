@@ -679,20 +679,24 @@ ul.marketingDetails li {
     background-color: white;
     border: 1px black solid;
     padding: 20px;
-    width: 87.7%;
+    width: 88.2%;
     margin-bottom: -15px;
-    margin-left: 6.3%;
+    margin-left: 6%;
+    position: relative;
+    bottom: -115px;
+    left: 0.8px;
 }
 
 .sendMailPopup.offer {
     background-color: white;
     border: 1px black solid;
     padding: 20px;
-    width: 87.7%;
+    width: 89%;
     margin-bottom: -15px;
     margin-left: 6.3%;
     position: relative;
-    bottom: -65px;
+    bottom: -115px;
+    left: -1px;
 }
 
 .sendMailPopup h3 {

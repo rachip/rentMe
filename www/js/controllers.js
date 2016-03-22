@@ -228,17 +228,17 @@ angular.module('starter.controllers', ['firebase'])
 	};
 	
 	$scope.closeMailPopup = function() {
-		$ionicScrollDelegate.scrollTop();
+		$ionicScrollDelegate.scrollBottom();
 		$scope.sendMail = 0;
 	};
 	
 	$scope.closeMeetingPopup = function() {
-		$ionicScrollDelegate.scrollTop();
+		$ionicScrollDelegate.scrollBottom();
 		$scope.meet = 0;
 	};
 	
 	$scope.send = function() {
-		$ionicScrollDelegate.scrollTop();	
+		$ionicScrollDelegate.scrollBottom();	
 		$scope.sendMail = 0;
 		
 		var obj = {name: $scope.MailObj.name, mail: $scope.MailObj.mail, phone: $scope.MailObj.phone,
@@ -250,7 +250,7 @@ angular.module('starter.controllers', ['firebase'])
 		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/rent', 
 		    method: "POST",
 		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address, propertyName: propertyName},
+				   address: $scope.MailObj.address, propertyName: propertyName, bid: $scope.MailObj.bid, codeCoupon: $scope.MailObj.codeCoupon},
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then(function(resp) {
 			console.log("sucess")
@@ -263,7 +263,7 @@ angular.module('starter.controllers', ['firebase'])
 		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/addContactLeads', 
 		    method: "POST",
 		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address},
+		    	   schedule: $scope.MailObj.schedule, address: $scope.MailObj.address, bid: $scope.MailObj.bid, codeCoupon: $scope.MailObj.codeCoupon},
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then(function(resp) {
 			console.log("sucess")
@@ -274,11 +274,11 @@ angular.module('starter.controllers', ['firebase'])
 	}
 	
 	$scope.setMeeting = function() {
-		$ionicScrollDelegate.scrollTop();	
+		$ionicScrollDelegate.scrollBottom();	
 		$scope.meet = 0;
 		
 		var obj = {name: $scope.MailObj.name, mail: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address, propertyName: propertyName};
+				   schedule: $scope.MailObj.schedule, propertyName: propertyName, codeCoupon: $scope.MailObj.codeCoupon};
 		console.log(obj);
 		
 		// send mail to moshe gmail
@@ -286,7 +286,7 @@ angular.module('starter.controllers', ['firebase'])
 		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/meeting', 
 		    method: "POST",
 		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address, propertyName: propertyName},
+		    	schedule: $scope.MailObj.schedule, propertyName: propertyName, codeCoupon: $scope.MailObj.codeCoupon},
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then(function(resp) {
 			console.log("sucess")
@@ -299,7 +299,7 @@ angular.module('starter.controllers', ['firebase'])
 		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/addContactLeads', 
 		    method: "POST",
 		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address},
+		    	   schedule: $scope.MailObj.schedule, address: '', bid: '', codeCoupon: $scope.MailObj.codeCoupon},
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then(function(resp) {
 			console.log("sucess")
