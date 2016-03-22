@@ -175,10 +175,10 @@ angular.module('starter.controllers', ['firebase'])
 		$scope.selectedBranch = "";
 	}
 	
-	$scope.marketingDetails = function(propertyId) {	
+	$scope.marketingDetails = function(propertyId, propertyName) {	
 		$state.go('invest.marketingDetails');
 		$timeout(function() {
-	    	var unbind = $rootScope.$broadcast( "marketingDetails", {marketingPropertyId:propertyId} );
+	    	var unbind = $rootScope.$broadcast( "marketingDetails", {marketingPropertyId:propertyId, marketingPropertyName:propertyName} );
 	    });
 	};
 })
@@ -191,6 +191,7 @@ angular.module('starter.controllers', ['firebase'])
 	
 	$scope.$on( "marketingDetails", function(event, data) {
 		propertyId = data.marketingPropertyId;
+		propertyName = data.marketingPropertyName;
 		var promise = getMarketingDetailsPageData(propertyId, $scope, $http, $q);
 		promise.then(function() {
 		}, function() {
@@ -241,7 +242,7 @@ angular.module('starter.controllers', ['firebase'])
 		$scope.sendMail = 0;
 		
 		var obj = {name: $scope.MailObj.name, mail: $scope.MailObj.mail, phone: $scope.MailObj.phone,
-				   address: $scope.MailObj.address};
+				   address: $scope.MailObj.address, propertyName: propertyName};
 		console.log(obj);
 		
 		// send mail to moshe gmail
@@ -249,7 +250,43 @@ angular.module('starter.controllers', ['firebase'])
 		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/rent', 
 		    method: "POST",
 		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
+				   address: $scope.MailObj.address, propertyName: propertyName},
+		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).then(function(resp) {
+			console.log("sucess")
+		}, function(err) {
+		    console.error('ERR', err);
+		})	
+		
+		// save mail details in S_ContactsLeads tbl
+		$http({
+		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/addContactLeads', 
+		    method: "POST",
+		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
 				   address: $scope.MailObj.address},
+		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+		}).then(function(resp) {
+			console.log("sucess")
+		}, function(err) {
+		    console.error('ERR', err);
+		})	
+		$scope.MailObj = {};
+	}
+	
+	$scope.setMeeting = function() {
+		$ionicScrollDelegate.scrollTop();	
+		$scope.meet = 0;
+		
+		var obj = {name: $scope.MailObj.name, mail: $scope.MailObj.mail, phone: $scope.MailObj.phone,
+				   address: $scope.MailObj.address, propertyName: propertyName};
+		console.log(obj);
+		
+		// send mail to moshe gmail
+		$http({
+		    url: 'http://ec2-52-32-92-71.us-west-2.compute.amazonaws.com/index.php/Students/api/S_Email/meeting', 
+		    method: "POST",
+		    data: {name: $scope.MailObj.name, email: $scope.MailObj.mail, phone: $scope.MailObj.phone,
+				   address: $scope.MailObj.address, propertyName: propertyName},
 		    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
 		}).then(function(resp) {
 			console.log("sucess")
@@ -355,7 +392,7 @@ angular.module('starter.controllers', ['firebase'])
 	
 	$rootScope.isPropertyDetailsLoading = true;
 	
-	var propertyId = 3;
+	var propertyId = 1;
 	
 		//propertyId = data.PropertyId;	
 		var promise = getOverviewDetailsPageData(propertyId, $scope, $http, $q);
@@ -553,6 +590,13 @@ function addClass(data) {
 	}
 }
 
+//Add comma to each property price
+function addCommaToPrice(data) {
+	for(var i = 0; i < data.length; i++) {			
+		data[i]["Rent"] = numberWithCommas(data[i]["Rent"]);
+	}
+}
+
 function getRochesterProperties($scope, $http) {
 	// get properties to Rochester branch
 	return $http({
@@ -568,7 +612,9 @@ function getRochesterProperties($scope, $http) {
 		if(resp.data.length == 0) {
 			$scope.showRochester = 0;
 		}
+		
 		addClass($scope.rochesterProperties);
+		addCommaToPrice($scope.rochesterProperties);
 		
 	}, function(err) {
 	    console.error('ERR', err);
@@ -589,7 +635,9 @@ function getClevelandProperties($scope, $http) {
 		if(resp.data.length == 0) {
 			$scope.showCleveland = 0;
 		}
+		
 		addClass($scope.clevelandProperties);
+		addCommaToPrice($scope.clevelandProperties);
 	
 	}, function(err) {
 	    console.error('ERR', err);
@@ -611,7 +659,9 @@ function getColumbusProperties($scope, $http) {
 		if(resp.data.length == 0) {
 			$scope.showColumbus = 0;
 		}
+		
 		addClass($scope.columbusProperties);
+		addCommaToPrice($scope.columbusProperties);
 	
 	}, function(err) {
 	    console.error('ERR', err);
@@ -632,7 +682,9 @@ function getJacksonvilleProperties($scope, $http) {
 		if(resp.data.length == 0) {
 			$scope.showJacksonviller = 0;
 		}
+		
 		addClass($scope.jacksonvilleProperties);
+		addCommaToPrice($scope.jacksonvilleProperties);
 		
 	}, function(err) {
 	    console.error('ERR', err);
@@ -676,7 +728,7 @@ function getMarketingPropertyInfo(propertyId, $scope, $http) {
 		if (resp.data.length != 0) {
 			$scope.marketingData = resp.data[0];
 			
-			$scope.marketingData["Price"] = numberWithCommas($scope.marketingData["Price"]);
+			$scope.marketingData["Rent"] = numberWithCommas($scope.marketingData["Rent"]);
 			$scope.marketingData["AvailableDate"] = dateFormat($scope.marketingData["AvailableDate"]);
 			$scope.marketingData["OpenShowingDate"] = dateFormat($scope.marketingData["OpenShowingDate"]);
 			
