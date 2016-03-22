@@ -22,7 +22,7 @@ angular.module('starter.controllers', ['firebase'])
 	
 	$scope.sideMenuNavigation = function() {
 		if(localStorage.getItem("email") != null) {
-			$state.go('app.overview');
+			$state.go('app.propertyDetails');
 		} else
 			$state.go('auth.main');
 	}  
