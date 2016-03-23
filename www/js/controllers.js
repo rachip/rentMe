@@ -134,7 +134,7 @@ angular.module('starter.controllers', ['firebase'])
 						});
 				}
 					
-				$state.go('app.overview');
+				$state.go('app.propertyDetails');
 			}
 		
 		}, function(err) {
@@ -346,7 +346,7 @@ angular.module('starter.controllers', ['firebase'])
   	$scope.myId = localStorage.getItem("id"); 
  	var userId = localStorage.getItem("id"); 
  
- 	var ref = new Firebase("https://updatemeapp.firebaseio.com/messages/" + TheBranchName + "/" + userId); 
+ 	var ref = new Firebase("https://rentmeapp.firebaseio.com/messages/" + TheBranchName + "/" + userId); 
  
   	ref.on("child_added", function(date) { 
 	 	$ionicScrollDelegate.scrollBottom(); 
